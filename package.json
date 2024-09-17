@@ -15,6 +15,14 @@
       "path": "node_modules/cz-git"
     }
   },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{css,less}": [
+      "stylelint --fix"
+    ]
+  },
   "keywords": [],
   "author": "frontendley",
   "license": "ISC",
@@ -30,6 +38,7 @@
     "commitizen": "4.3.0",
     "cz-git": "1.9.4",
     "commitlint": "19.5.0",
-    "@commitlint/config-conventional": "19.5.0"
+    "@commitlint/config-conventional": "19.5.0",
+    "lint-staged": "15.2.10"
   }
 }

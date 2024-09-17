@@ -7,7 +7,13 @@
     "eslint": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "stylelint": "stylelint \"**/*.{css,less}\"",
     "lint": "pnpm eslint && pnpm stylelint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   },
   "keywords": [],
   "author": "frontendley",
@@ -20,6 +26,10 @@
     "stylelint-config-standard": "36.0.1",
     "postcss-less": "6.0.0",
     "stylelint-less": "3.0.1",
-    "husky": "9.1.6"
+    "husky": "9.1.6",
+    "commitizen": "4.3.0",
+    "cz-git": "1.9.4",
+    "commitlint": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0"
   }
 }

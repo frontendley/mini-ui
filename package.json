@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "eslint": "eslint \"**/*.{js,ts,tsx}\" --fix",
-    "stylelint": "stylelint \"**/*.{css,less}\""
+    "stylelint": "stylelint \"**/*.{css,less}\"",
+    "lint": "pnpm eslint && pnpm stylelint",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "frontendley",
@@ -17,6 +19,7 @@
     "stylelint": "16.9.0",
     "stylelint-config-standard": "36.0.1",
     "postcss-less": "6.0.0",
-    "stylelint-less": "3.0.1"
+    "stylelint-less": "3.0.1",
+    "husky": "9.1.6"
   }
 }

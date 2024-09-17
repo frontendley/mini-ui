@@ -1,1 +1,4 @@
-const a = {}
+function test() {
+
+}
+test()

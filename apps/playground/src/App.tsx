@@ -1,4 +1,5 @@
-import { Button } from "@mini-ui/components"
+import { Button } from "@mini-ui/ui"
+import "@mini-ui/ui/dist/index.css"
 
 function App() {
 

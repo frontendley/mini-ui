@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 import {lessLoader} from "esbuild-plugin-less";
 export default defineConfig({
-  entry: ["index.ts"],
+  entry: ["src"],
   splitting: false,
   sourcemap: false,
   clean: true,

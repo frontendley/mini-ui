@@ -1,0 +1,20 @@
+{
+  "name": "@mini-ui/website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rspress dev",
+    "build": "rspress build",
+    "preview": "rspress preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rspress": "1.30.0",
+    "typescript": "5.6.2",
+    "ts-node": "10.9.2",
+    "@rspress/plugin-preview": "1.30.0"
+  }
+}

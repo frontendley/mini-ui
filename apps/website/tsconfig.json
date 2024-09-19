@@ -1,0 +1,7 @@
+{
+  "extends": ["../../tsconfig.json"],
+  "include": ["docs", "theme", "rspress.config.ts"],
+  "mdx": {
+    "checkMdx": true
+  }
+}

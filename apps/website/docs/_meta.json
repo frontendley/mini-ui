@@ -1,0 +1,14 @@
+[
+  {
+    "text": "Guide",
+    "link": "/guides/start",
+    "activeMatch": "^/guides/",
+    "position": "left"
+  },
+  {
+    "text": "Github",
+    "link": "https://github.com/frontendley/mini-ui",
+    "activeMatch": "",
+    "position": "right"
+  }
+]

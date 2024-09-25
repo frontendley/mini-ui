@@ -1,6 +1,94 @@
-@import url("../../../styles/index");
+@import url("./token.less");
 
-.mini-btn {
-  color: #1a1a1a;
-  background-color: @color-primary-1;
+@btn-prefix: ~'@{prefix}-btn';
+
+.btn-type(@type) {
+  .@{btn-prefix}-@{type}:not(.@{btn-prefix}-disabled) {
+    background-color: ~'@{btn-@{type}-color-bg}';
+    color: ~'@{btn-@{type}-color-text}';
+    border: @border-1 @border-solid ~'@{btn-@{type}-color-border}';
+
+    &:hover {
+      color: ~'@{btn-@{type}-color-text}';
+      background-color: ~'@{btn-@{type}-color-bg_hover}';
+    }
+
+    &:active {
+      color: ~'@{btn-@{type}-color-text_active}';
+      background-color: ~'@{btn-@{type}-color-bg_active}';
+    }
+  }
+}
+
+.btn-status(@type, @status) {
+  .@{btn-prefix}-@{type}.@{btn-prefix}-status-@{status}:not(.@{btn-prefix}-disabled) {
+    background-color: ~'@{btn-@{type}-color-bg_@{status}}';
+    color: ~'@{btn-@{type}-color-text_@{status}}';
+    border-color: ~'@{btn-@{type}-color-border_@{status}}';
+
+    &:not(.@{btn-prefix}-loading):hover {
+      border-color: ~'@{btn-@{type}-color-border_@{status}_hover}';
+      color: ~'@{btn-@{type}-color-text_@{status}_hover}';
+      background-color: ~'@{btn-@{type}-color-bg_@{status}_hover}';
+    }
+
+    &:not(.@{btn-prefix}-loading):active {
+      border-color: ~'@{btn-@{type}-color-border_@{status}_active}';
+      color: ~'@{btn-@{type}-color-text_@{status}_active}';
+      background-color: ~'@{btn-@{type}-color-bg_@{status}_active}';
+    }
+
+  }
+
+  .@{btn-prefix}-@{type}.@{btn-prefix}-status-@{status}.@{btn-prefix}-disabled {
+    color: ~'@{btn-@{type}-color-text_@{status}_disabled}';
+    background-color: ~'@{btn-@{type}-color-bg_@{status}_disabled}';
+    border: @btn-border-width ~'@{btn-@{type}-border-style}' ~'@{btn-@{type}-color-border_@{status}_disabled}';
+  }
+}
+
+.btn-size(@size) {
+  .@{btn-prefix}-size-@{size} {
+    height: ~'@{btn-size-@{size}-height}';
+  }
+}
+
+.btn-type(outline);
+.btn-status(outline, warning);
+.btn-status(outline, danger);
+.btn-status(outline, success);
+
+.btn-type(primary);
+.btn-status(primary, warning);
+.btn-status(primary, danger);
+.btn-status(primary, success);
+
+.btn-type(secondary);
+.btn-status(secondary, warning);
+.btn-status(secondary, danger);
+.btn-status(secondary, success);
+
+.btn-type(dashed);
+.btn-status(dashed, warning);
+.btn-status(dashed, danger);
+.btn-status(dashed, success);
+
+.btn-type(text);
+.btn-status(text, warning);
+.btn-status(text, danger);
+.btn-status(text, success);
+
+.btn-size(mini);
+.btn-size(small);
+.btn-size(default);
+.btn-size(large);
+
+
+.@{btn-prefix} {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: @btn-border-radius;
+  box-sizing: border-box;
+  padding: 0 @btn-padding ;
 }

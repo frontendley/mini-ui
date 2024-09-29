@@ -10,7 +10,7 @@
 <code src="../../../../demo/button/status-button.tsx" />
 
 ## 组件的不同尺寸
-<code src="../../../../demo/button/size-button.tsx"/>
+<code src="../../../../demo/button/size-button.tsx" />
 
 ## 按钮禁用
 <code src="../../../../demo/button/disable-button.tsx" />
@@ -20,3 +20,19 @@
 
 ## loading 状态
 <code src="../../../../demo/button/loading-button.tsx" />
+
+按钮的属性说明如下：
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| disabled | 是否禁用按钮 | boolean | `false` |
+| loading | 按钮是否为加载状态 | boolean | `false` |
+| long | 按钮宽度是否跟随容器元素 | boolean | `false` |
+| htmlType | 按钮原生的html type类型 | `'button' \| 'submit' \| 'reset'` | `button` |
+| shape | 按钮的形状 `circle`-圆形 `round`-全圆角 `square`-长方形 | `square \| circle \| round` | `square`
+| size | 按钮的尺寸 | `'mini' \| 'small' \| 'default' \| 'large'` | `default`
+| status | 	按钮状态 | `'warning' \| 'danger' \| 'success' \| 'default'` | `default`
+| type | 按钮类型 | 'default' \| 'primary' \| 'secondary' \| 'dashed' \| 'text' \| 'outline' | `default`
+| className | 节点类名 | `string` \| `string[]` | -
+| style | 节点样式 | `CSSProperty` | -
+| onClick | 点击按钮的回调 | `(e: Event) => void` | -

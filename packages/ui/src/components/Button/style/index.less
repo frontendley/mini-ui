@@ -57,6 +57,16 @@
   .@{btn-prefix}-size-@{size} {
     height: ~'@{btn-size-@{size}-height}';
   }
+  .@{btn-prefix}-size-@{size}.@{btn-prefix}-shape-circle {
+    width: ~'@{size-@{size}}';
+    height: ~'@{size-@{size}}';
+    padding: 0;
+    text-align: center;
+    border-radius: @radius-circle;
+  }
+  .@{btn-prefix}-size-@{size}.@{btn-prefix}-shape-round {
+    border-radius: calc(~'@{size-@{size}}' * 0.5);
+  }
 }
 
 .btn-type(outline);
@@ -105,5 +115,11 @@
 
   &-loading {
     pointer-events:none;
+  }
+
+  &-shape {
+    &-square {
+     border-radius: @btn-border-radius; 
+    }
   }
 }

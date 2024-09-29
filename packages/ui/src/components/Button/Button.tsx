@@ -14,6 +14,7 @@ export const Button = ({
     type = 'default',
     size = 'default',
     long = false,
+    shape = "square",
     className,
     children,
     onClick,
@@ -25,6 +26,7 @@ export const Button = ({
       `${prefix}-${type}`,
       `${prefix}-status-${status}`,
       `${prefix}-size-${size}`,
+      `${prefix}-shape-${shape}`,
       {
         [`${prefix}-long`]: long,
         [`${prefix}-disabled`]: disabled

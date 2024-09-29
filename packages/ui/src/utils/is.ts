@@ -16,3 +16,4 @@ export const isNull = (value: unknown): value is null => value === null
 
 export const isUndefined = (value: unknown): value is undefined => value === undefined
 
+export const isFunction = (value:unknown):value is Function => typeof value === "function"

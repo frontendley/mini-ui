@@ -18,6 +18,12 @@
       background-color: ~'@{btn-@{type}-color-bg_active}';
     }
   }
+  .@{btn-prefix}-@{type}.@{btn-prefix}-disabled {
+    background-color: ~'@{btn-@{type}-color-bg_disabled}';
+    color: ~'@{btn-@{type}-color-text_disabled}';
+    border: @border-1 ~'@{btn-@{type}-border-style}' ~'@{btn-@{type}-color-border_disabled}';
+    cursor: not-allowed;
+  }
 }
 
 .btn-status(@type, @status) {
@@ -88,7 +94,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2px;
   border-radius: @btn-border-radius;
   box-sizing: border-box;
   padding: 0 @btn-padding ;
+
+  &-long {
+    width: 100%;
+  }
+
+  &-loading {
+    pointer-events:none;
+  }
 }

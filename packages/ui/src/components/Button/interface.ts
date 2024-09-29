@@ -1,5 +1,5 @@
-import {CSSProperties, ReactNode} from "react";
-export interface ButtonProps {
+import {ButtonHTMLAttributes, CSSProperties, ReactNode} from "react";
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<any>, "className" | "type"> {
   /**
    * @desc 组件的几种变体形式
    * */  
@@ -29,6 +29,12 @@ export interface ButtonProps {
    * 按钮是否处于加载状态
    * */
   loading?: boolean;
+  /**
+   * @zh
+   * 按钮的宽度随父容器进行变化
+   * */
+  long?: boolean;
+  htmlType?: HTMLButtonElement["type"]
   className?: string;
   autoSize?: boolean;
   style?: CSSProperties;

@@ -1,40 +1,56 @@
-import {CSSProperties, SVGAttributes} from "react";
-import { classNames as cs, getPrefix } from "../../utils";
+import { CSSProperties, SVGAttributes } from "react";
+import { classNames as cs, getPrefix, warning } from "../../utils";
 
-
+// 类型声明， 重载className、style、spin的属性
 export interface IconProps extends Omit<SVGAttributes<SVGElement>, "className"> {
   className?: string;
   style?: CSSProperties;
-  spin?: boolean
+  spin?: boolean;
+  component?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
-export function Icon (props: IconProps): JSX.Element {
-  const { className, spin, style, ...rest } = props
-
+export function Icon(props: IconProps): JSX.Element {
+  const {
+    className,
+    spin,
+    style,
+    viewBox,
+    component: Component,
+    children,
+    ...rest
+  } = props
+  // 处理className
   const prefix = getPrefix("icon")
   const classNames = cs(
-      {
-        [`${prefix}-spin`]: spin
-      },
-      className
+    {
+      [`${prefix}-spin`]: spin
+    },
+    className
   )
-
+  // 属性合并
   const defaultProps = {
     width: "1em",
     height: "1em",
-    // fill: "currentColor",
+    fill: "currenColor",
+    className: classNames,
+    viewBox,
+    ...rest
   }
+  // 处理Component
+  if (Component) {
+    return (
+      <Component {...defaultProps} />
+    )
+  }
+
+  // 处理Children
+  warning(
+    !Boolean(viewBox),
+    "Make sure that you provide correct ViewBox"
+  ) 
   return (
-      <svg
-        viewBox="0 0 48 48"
-        className={classNames}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="4"
-        { ...defaultProps }
-        { ...rest }
-      >
-        <path d="M42 24C42 33.9411 33.9411 42 24 42C14.0589 42 6 33.9411 6 24C6 14.0589 14.0589 6 24 6" strokeLinecap="butt"></path>
-      </svg>
+    <svg {...defaultProps}>
+      {children}
+    </svg>
   )
 }

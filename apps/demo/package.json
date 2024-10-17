@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@mini-ui/ui": "workspace: *",
+    "@mini-ui/icons": "workspace: *",
     "react": "18.3.1"
   }
 }

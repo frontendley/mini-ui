@@ -1,0 +1,151 @@
+@import url("./token.less");
+@import url("./status.less");
+
+@input-prefix-cls: ~'@{prefix}-input';
+
+
+
+.get-padding(@input-size-height, @input-font-size) {
+  padding-top: (
+    round(
+      ((@input-size-height - @input-border-width * 2 - @line-height-base * @input-font-size) / 2)
+    )
+  );
+  padding-bottom: round(
+    ((@input-size-height - @input-border-width * 2 - @line-height-base * @input-font-size) / 2)
+  );
+}
+
+.disabled-style() {
+  background-color: @input-color-bg_disabled;
+  cursor: not-allowed;
+  color: @input-color-text_disabled;
+  -webkit-text-fill-color: @input-color-text_disabled;
+  border-color: @input-color-border_disabled;
+
+  &:hover {
+    border-color: @input-color-border_disabled;
+    background-color: @input-color-bg_disabled;
+    color: @input-color-text_disabled;
+  }
+
+  &::placeholder {
+    color: @input-color-text_disabled;
+  }
+}
+
+.input-style() {
+  outline: none;
+  appearance: none;
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+  width: 100%;
+  border-radius: @input-border-radius;
+  color: @input-color-text;
+  padding-left: @input-padding-horizontal;
+  padding-right: @input-padding-horizontal;
+  font-size: @input-size-default-font-size;
+  box-sizing: border-box;
+  transition: color @transition-duration-1 @transition-timing-function-linear,
+    border-color @transition-duration-1 @transition-timing-function-linear,
+    background-color @transition-duration-1 @transition-timing-function-linear;
+  border: @input-border-width solid @input-color-border;
+  background-color: @input-color-bg;
+
+  &::placeholder {
+    color: @input-color-placeholder-text;
+  }
+
+  &:hover {
+    background-color: @input-color-bg_hover;
+    border-color: @input-color-border_hover;
+  }
+
+  &:focus,
+  &&-focus {
+    border-color: @input-color-border_focus;
+    background-color: @input-color-bg_focus;
+    box-shadow: 0 0 0 @input-size-shadow_focus @input-color-shadow_focus;
+  }
+
+  .input-status(error);
+  .input-status(warning);
+}
+
+.@{input-prefix-cls} {
+  .get-padding(@input-size-default-height, @input-size-default-font-size);
+
+  line-height: @line-height-base;
+  .input-style();
+
+  &-autowidth {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+
+    &:hover {
+      text-overflow: unset;
+    }
+  }
+
+  // 禁用样式
+  &-disabled {
+    .disabled-style();
+  }
+
+  input:disabled {
+    color: @input-color-text_disabled;
+    opacity: 1;
+    -webkit-text-fill-color: @input-color-text_disabled;
+  }
+
+  &-word-limit {
+    font-size: @input-font-tip-size;
+    color: @input-color-tip-text;
+    padding-left: @input-padding-word-limit-left;
+
+    &-error {
+      color: @input-color-border_error_focus;
+    }
+  }
+  // 不同尺寸
+  // .size-height();
+}
+
+// 清除icon
+// .@{input-prefix-cls}-clear-icon {
+//   font-size: @input-size-icon-clear;
+//   cursor: pointer;
+//   color: @input-color-icon-clear;
+
+//   &:focus-visible::before {
+//     box-shadow: 0 0 0 2px @input-color-border_focus;
+//   }
+
+//   > svg {
+//     transition: color @transition-duration-1 @transition-timing-function-linear;
+//     position: relative;
+//   }
+// }
+
+// .@{input-prefix-cls}-inner-wrapper {
+//   .input-style();
+
+//   display: inline-flex;
+//   width: 100%;
+//   position: relative;
+//   align-items: center;
+
+//   .@{input-prefix-cls} {
+//     padding-left: 0;
+//     padding-right: 0;
+//     border-radius: 0;
+//     border: none;
+//     background: none;
+//   }
+
+//   .@{input-prefix-cls}:hover,
+//   .@{input-prefix-cls}:focus {
+//     background: none;
+//     box-shadow: none;
+//   }
+// }

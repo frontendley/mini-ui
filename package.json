@@ -8,7 +8,10 @@
     "stylelint": "stylelint \"**/*.{css,less}\"",
     "lint": "pnpm eslint && pnpm stylelint",
     "prepare": "husky",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "dev:ui": "pnpm --filter=ui run dev",
+    "docs": "pnpm --filter=website run dev",
+    "dev": "pnpm -r --parallel --filter=ui --filter=website run dev"
   },
   "config": {
     "commitizen": {

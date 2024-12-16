@@ -1,8 +1,8 @@
-import {ChangeEvent, InputHTMLAttributes} from "react";
+import {ChangeEvent, InputHTMLAttributes, ReactNode} from "react";
 
 export interface InputProps extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
-    'onChange'
+    'onChange' | 'maxLength'
 > {
   /**
    * @zh placehode, 输入框的提示文字
@@ -31,7 +31,22 @@ export interface InputProps extends Omit<
   /**
    * @zh 允许清空输入框
    * */
-  allowClear?: boolean
+  allowClear?: boolean;
+  /**
+   * @zh 设置输入框最大输入的长度；设置errorOnly为true后， 超过maxLength会展示error状态。并不限制用户输入
+   * */
+  maxLength?: number | {
+    length: number;
+    errorOnly?: boolean;
+  };
+  /**
+   * @zh 是否在输入框的suffix组成部分展示字数统计
+   * */
+  showWordLimit?: boolean;
+  /**
+   * @zh Input组件中的后缀内容。
+   * */ 
+  suffix?: ReactNode
 }
 
 export interface InputRef {

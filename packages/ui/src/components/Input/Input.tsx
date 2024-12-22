@@ -1,6 +1,6 @@
-import {isFunction, isObject} from "../../utils"
+import {isArray, isFunction, isObject} from "../../utils"
 import {InputProps, InputRef} from "./type"
-import type { CompositionEvent, ChangeEvent } from "react";
+import type { CompositionEvent, ChangeEvent, FocusEvent } from "react";
 import {forwardRef, useImperativeHandle, useRef} from "react"
 import {useMergeState} from "../../hooks/useMergeState";
 import { useComposition } from "./hooks/useComposition";
@@ -12,6 +12,8 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     maxLength: propMaxLength,
     showWordLimit,
     suffix: propSuffix,
+    normalize,
+    normalizeTrigger,
     ...rest
   } = props
 
@@ -53,10 +55,22 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     isFunction(props.onChange) && props.onChange(value, event)
   }
 
+  // 获取normalize
+  const normalizeTriggerHandler = (type: "onPressEnter" | "onBlur") => {
+    const triggers = normalizeTrigger || ['onBlur']
+    if(
+      isArray(triggers)
+      && triggers.indexOf(type) > -1
+      && isFunction(normalize)
+    )
+      return normalize
+  }
+
   const {
     compositionValue,
     handleComposition,
-    valueChangeHandler
+    valueChangeHandler,
+    triggerChange
   } = useComposition({
     value,
     onChange: handleChange
@@ -88,6 +102,12 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
             maxLength={maxLength}
             value={compositionValue || value}
             onChange={valueChangeHandler}
+            onBlur={(event: FocusEvent<HTMLInputElement>) => {
+              props?.onBlur?.(event)
+
+              const normalizeHandler = normalizeTriggerHandler("onBlur")
+              normalizeHandler && triggerChange(normalizeHandler(value), event)
+            }}
             onCompositionStart={(event: CompositionEvent<HTMLInputElement>) => {
               props?.onCompositionStart?.(event)
               handleComposition(event)

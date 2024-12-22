@@ -46,7 +46,15 @@ export interface InputProps extends Omit<
   /**
    * @zh Input组件中的后缀内容。
    * */ 
-  suffix?: ReactNode
+  suffix?: ReactNode;
+  /**
+   * @zh Input组件中格式化api
+   * */ 
+  normalize?: (value: string) => string;
+  /**
+   * @zh Input组件格式化时机
+   * */ 
+  normalizeTrigger?: ["onBlur" | "onPressEnter"];
 }
 
 export interface InputRef {

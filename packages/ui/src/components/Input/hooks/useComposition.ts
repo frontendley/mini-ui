@@ -49,6 +49,7 @@ export function useComposition({
   return {
     compositionValue,
     handleComposition,
-    valueChangeHandler
+    valueChangeHandler,
+    triggerChange
   }
 }

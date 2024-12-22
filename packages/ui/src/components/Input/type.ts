@@ -1,4 +1,4 @@
-import {ChangeEvent, InputHTMLAttributes, ReactNode, CompositionEvent} from "react";
+import {ChangeEvent, InputHTMLAttributes, ReactNode, CompositionEvent, KeyboardEvent} from "react";
 
 export interface InputProps extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
@@ -19,7 +19,7 @@ export interface InputProps extends Omit<
   /**
    * @zh input输入时的回调函数
    * */
-  onChange?: (value: string, e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => void;
+  onChange?: (value: string, e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement>) => void;
   /**
    * @zh input元素的类名
    * */
@@ -55,6 +55,10 @@ export interface InputProps extends Omit<
    * @zh Input组件格式化时机
    * */ 
   normalizeTrigger?: ["onBlur" | "onPressEnter"];
+  /**
+   * @zh 按下回车键的回调
+   * */ 
+  onPressEnter?: (event: KeyboardEvent<HTMLInputElement>) => void
 }
 
 export interface InputRef {

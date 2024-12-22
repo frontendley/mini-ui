@@ -7,6 +7,11 @@ export default function app () {
         normalize={value => value.toLocaleLowerCase()}
         normalizeTrigger={['onBlur']}
       />
+      <Input
+        normalize={value => value.toLocaleLowerCase()}
+        normalizeTrigger={['onPressEnter']}
+        onPressEnter={e => console.log("press enter")}
+      />
     </div>
   )
 }

@@ -1,13 +1,19 @@
-import type { CompositionEvent, ChangeEvent } from "react"
+import type { CompositionEvent, ChangeEvent, KeyboardEvent } from "react"
 import { useRef, useState } from "react"
 import { InputProps } from "../type"
 
 export function useComposition({
   value,
-  onChange
+  onChange,
+  onPressEnter,
+  onKeyDown,
+  normalizeTriggerHandler
 }: {
   value: string,
-  onChange: InputProps['onChange']
+  onChange: InputProps['onChange'],
+  onPressEnter: InputProps['onPressEnter'],
+  onKeyDown: InputProps['onKeyDown'],
+  normalizeTriggerHandler: (type: "onPressEnter" | "onBlur") => InputProps['normalize']
 }) {
   const isCompositionRef = useRef<boolean>(false)
   const [compositionValue, setCompositionValue] = useState<string>()
@@ -46,10 +52,22 @@ export function useComposition({
     }
   }
 
+  const keydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (isCompositionRef.current)
+      return
+    onKeyDown?.(event)
+    if(event.key === "Enter") {
+      onPressEnter?.(event)
+      const normalizeHandler = normalizeTriggerHandler('onPressEnter')
+      normalizeHandler && triggerChange(normalizeHandler(value), event)
+    }
+  }
+
   return {
     compositionValue,
     handleComposition,
     valueChangeHandler,
-    triggerChange
+    triggerChange,
+    keydownHandler
   }
 }

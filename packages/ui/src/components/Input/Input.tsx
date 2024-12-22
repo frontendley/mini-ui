@@ -1,6 +1,6 @@
 import {isArray, isFunction, isObject} from "../../utils"
 import {InputProps, InputRef} from "./type"
-import type { CompositionEvent, ChangeEvent, FocusEvent } from "react";
+import type { CompositionEvent, ChangeEvent, FocusEvent, KeyboardEvent } from "react";
 import {forwardRef, useImperativeHandle, useRef} from "react"
 import {useMergeState} from "../../hooks/useMergeState";
 import { useComposition } from "./hooks/useComposition";
@@ -14,6 +14,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     suffix: propSuffix,
     normalize,
     normalizeTrigger,
+    onPressEnter,
     ...rest
   } = props
 
@@ -47,7 +48,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     )
   }
   // event 事件处理
-  const handleChange = (value: string, event: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => {
+  const handleChange = (value: string, event: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement>) => {
     if (!('value' in props)) { //TODO: 状态补全
       setValue(value)
     }
@@ -70,10 +71,14 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     compositionValue,
     handleComposition,
     valueChangeHandler,
-    triggerChange
+    triggerChange,
+    keydownHandler
   } = useComposition({
     value,
-    onChange: handleChange
+    onChange: handleChange,
+    onKeyDown: props.onKeyDown,
+    onPressEnter,
+    normalizeTriggerHandler
   })
 
 
@@ -120,6 +125,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
               props?.onCompositionEnd?.(event)
               handleComposition(event)
             }}
+            onKeyDown={keydownHandler}
         />
         {suffix}
       </div>

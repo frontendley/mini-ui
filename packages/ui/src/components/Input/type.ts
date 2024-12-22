@@ -1,4 +1,4 @@
-import {ChangeEvent, InputHTMLAttributes, ReactNode} from "react";
+import {ChangeEvent, InputHTMLAttributes, ReactNode, CompositionEvent} from "react";
 
 export interface InputProps extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
@@ -19,7 +19,7 @@ export interface InputProps extends Omit<
   /**
    * @zh input输入时的回调函数
    * */
-  onChange?: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: string, e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => void;
   /**
    * @zh input元素的类名
    * */

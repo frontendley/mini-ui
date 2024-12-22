@@ -1,7 +1,9 @@
 import {isFunction, isObject} from "../../utils"
 import {InputProps, InputRef} from "./type"
-import {ChangeEvent, forwardRef, useImperativeHandle, useRef} from "react"
+import type { CompositionEvent, ChangeEvent } from "react";
+import {forwardRef, useImperativeHandle, useRef} from "react"
 import {useMergeState} from "../../hooks/useMergeState";
+import { useComposition } from "./hooks/useComposition";
 
 export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   // props
@@ -43,13 +45,23 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     )
   }
   // event 事件处理
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (value: string, event: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => {
     if (!('value' in props)) { //TODO: 状态补全
-      setValue(event.target.value)
+      setValue(value)
     }
 
-    isFunction(props.onChange) && props.onChange(event.target.value, event)
+    isFunction(props.onChange) && props.onChange(value, event)
   }
+
+  const {
+    compositionValue,
+    handleComposition,
+    valueChangeHandler
+  } = useComposition({
+    value,
+    onChange: handleChange
+  })
+
 
   // 向上层暴露ref
   useImperativeHandle(
@@ -74,8 +86,20 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
             ref={inputRef}
             {...rest}
             maxLength={maxLength}
-            value={value}
-            onChange={handleChange}
+            value={compositionValue || value}
+            onChange={valueChangeHandler}
+            onCompositionStart={(event: CompositionEvent<HTMLInputElement>) => {
+              props?.onCompositionStart?.(event)
+              handleComposition(event)
+            }}
+            onCompositionUpdate={(event: CompositionEvent<HTMLInputElement>) => {
+              props?.onCompositionUpdate?.(event)
+              handleComposition(event)
+            }}
+            onCompositionEnd={(event: CompositionEvent<HTMLInputElement>) => {
+              props?.onCompositionEnd?.(event)
+              handleComposition(event)
+            }}
         />
         {suffix}
       </div>

@@ -5,6 +5,15 @@
   text-align: center;
 }
 
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

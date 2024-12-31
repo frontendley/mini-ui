@@ -29,7 +29,7 @@ function Suberscriber() {
   }
 
   return (
-    <div className="app">
+    <div className="subscriber">
       <div>
         { snapShot.count }
       </div>

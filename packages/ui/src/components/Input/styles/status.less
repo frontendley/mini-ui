@@ -1,5 +1,15 @@
 .input-status(@status) {
   &-@{status} {
     background-color: #fff;
+    border-color: ~'@{input-color-border_@{status}}';
+
+    &-focused {
+      border-color: ~'@{input-color-border_hover_@{status}}';
+    }
+
+    &:hover {
+      border-color: ~'@{input-color-border_hover_@{status}}';
+    }
+  
   }
 }

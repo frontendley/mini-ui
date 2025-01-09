@@ -5,7 +5,6 @@ import {forwardRef, useImperativeHandle, useRef, useState} from "react"
 import {useMergeState} from "../../hooks/useMergeState";
 import { useComposition } from "./hooks/useComposition";
 import { InputWrapper } from "./InputWrapper";
-import { IconClose } from "../../../../icons/src";
 
 export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   // props
@@ -21,6 +20,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     prefix,
     addonBefore,
     addonAfter,
+    status,
     ...rest
   } = props
 
@@ -47,6 +47,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
 
   // 派生数据
   let suffix = propSuffix
+  let isExceedWordLimit = realMaxLength && value?.length > realMaxLength
   if (showWordLimit) {
     const valueLength = value?.length
     suffix = (
@@ -125,6 +126,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
         prefix={prefix}
         addonBefore={addonBefore}
         addonAfter={addonAfter}
+        status={isExceedWordLimit ? 'error' : status}
       >
         <input
             className={inputClassNames}

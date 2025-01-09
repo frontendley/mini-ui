@@ -28,6 +28,7 @@ export function InputWrapper(props: InputWrapperProps) {
     suffix,
     addonBefore,
     addonAfter,
+    status,
     children,
   } = props
 
@@ -38,7 +39,8 @@ export function InputWrapper(props: InputWrapperProps) {
   const inputWrapperCls = classNames(
     `${baseCls}-wrapper`,
     {
-      [`${baseCls}-wrapper-focused`]: focus
+      [`${baseCls}-wrapper-focused`]: focus,
+      [`${baseCls}-wrapper-${status}`]: status
     }
   )
 

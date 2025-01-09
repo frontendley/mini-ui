@@ -53,6 +53,7 @@
   display: inline-flex;
   padding: @input-spacing-vertical @input-spacing-horizontal;
   border: @input-width-border @input-shape-border @input-color-border;
+  border-radius: @input-size-radius;
 
   &:hover {
     border-color: @input-color-border_hover;
@@ -67,5 +68,8 @@
   &-focused {
     border-color: @input-color-border_focused;
   }
+
+  .input-status(warning);
+  .input-status(error);
 
 }

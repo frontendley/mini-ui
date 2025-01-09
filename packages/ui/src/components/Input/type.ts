@@ -20,7 +20,11 @@ interface CommonProps {
   /**
    * @zh Input组件中的后置标签
    * */ 
-  addonAfter?: ReactNode
+  addonAfter?: ReactNode;
+  /**
+   * @zh Input组件中的后置标签
+   * */ 
+  status?: 'error' | 'warning';
 }
 
 export interface InputProps extends Omit<

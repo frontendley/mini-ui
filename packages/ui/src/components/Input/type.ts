@@ -2,6 +2,10 @@ import {ChangeEvent, InputHTMLAttributes, ReactNode, CompositionEvent, KeyboardE
 
 interface CommonProps {
   /**
+   * @zh 允许清空输入框
+   * */
+  allowClear?: boolean;
+  /**
    * @zh Input组件中的后缀内容。
    * */ 
   suffix?: ReactNode;
@@ -48,10 +52,6 @@ export interface InputProps extends Omit<
    * */
   wrapperClassName?: string;
   /**
-   * @zh 允许清空输入框
-   * */
-  allowClear?: boolean;
-  /**
    * @zh 设置输入框最大输入的长度；设置errorOnly为true后， 超过maxLength会展示error状态。并不限制用户输入
    * */
   maxLength?: number | {
@@ -78,6 +78,7 @@ export interface InputProps extends Omit<
 
 export interface InputWrapperProps extends CommonProps {
   focus: boolean;
+  onClear: (e: MouseEvent<HTMLSpanElement>) => void;
   onFocus: (e: MouseEvent<HTMLDivElement>) => void;
   children: ReactNode
 }

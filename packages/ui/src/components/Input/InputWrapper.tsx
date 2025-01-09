@@ -1,6 +1,8 @@
 import { CSSProperties, MouseEvent, ReactNode, useRef } from "react"
 import { classNames } from "../../utils"
 import { InputWrapperProps } from "./type";
+import { IconClose } from "../../../../icons/src";
+
 
 function computedElement(
   element?: ReactNode,
@@ -18,8 +20,10 @@ function computedElement(
 
 export function InputWrapper(props: InputWrapperProps) {
   const {
+    allowClear,
     focus,
     onFocus,
+    onClear,
     prefix,
     suffix,
     addonBefore,
@@ -51,6 +55,15 @@ export function InputWrapper(props: InputWrapperProps) {
       { computedElement(addonBefore, `${baseCls}-addon-before`)}
       { computedElement(prefix, `${baseCls}-suffix`)}
       { children }
+      { 
+        allowClear 
+        ? (
+          <span className="mini-input-clear" onClick={onClear}>
+            <IconClose className="mini-input-clear-icon"/>
+          </span>
+        )
+        : null
+      }
       { computedElement(suffix, `${baseCls}-suffix`)}
       { computedElement(addonAfter, `${baseCls}-addon-after`)}
     </span>

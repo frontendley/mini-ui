@@ -7,6 +7,34 @@
   display: inline-block;
   width: 100%;
   outline: medium;
+  
+  &-clear {
+    visibility: hidden;
+    position: relative;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 20px;
+      width: 20px;
+      transform: translate(-50%,-50%);
+      border-radius: @border-radius-circle;
+    }
+
+    &:hover::before {
+      background-color: @input-color-border;
+    }
+
+    &-icon {
+      position: relative;
+    }
+  }
 
   &-prefix,
   &-addon-before,
@@ -28,6 +56,12 @@
 
   &:hover {
     border-color: @input-color-border_hover;
+
+    .@{input-prefix-cls} {
+      &-clear {
+        visibility: visible;
+      }
+    }
   }
 
   &-focused {

@@ -1,14 +1,16 @@
 import {classNames, isArray, isFunction, isObject} from "../../utils"
 import {InputProps, InputRef} from "./type"
-import type { CompositionEvent, ChangeEvent, FocusEvent, KeyboardEvent } from "react";
+import type { CompositionEvent, ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react";
 import {forwardRef, useImperativeHandle, useRef, useState} from "react"
 import {useMergeState} from "../../hooks/useMergeState";
 import { useComposition } from "./hooks/useComposition";
 import { InputWrapper } from "./InputWrapper";
+import { IconClose } from "../../../../icons/src";
 
 export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   // props
   const {
+    allowClear = true,
     defaultValue,
     maxLength: propMaxLength,
     showWordLimit,
@@ -16,6 +18,9 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     normalize,
     normalizeTrigger,
     onPressEnter,
+    prefix,
+    addonBefore,
+    addonAfter,
     ...rest
   } = props
 
@@ -57,6 +62,11 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     }
 
     isFunction(props.onChange) && props.onChange(value, event)
+  }
+
+  // 处理清除事件
+  const handleClear = (event: MouseEvent<HTMLSpanElement>) => {
+    handleChange('', event as any)
   }
 
   // 获取normalize
@@ -104,13 +114,17 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
 
   return (
       <InputWrapper
-        {...rest}
+        allowClear={allowClear}
         focus={focus}
         onFocus={() => {
           setFocus(true)
           inputRef.current?.focus()
         }}
+        onClear={handleClear}
         suffix={suffix}
+        prefix={prefix}
+        addonBefore={addonBefore}
+        addonAfter={addonAfter}
       >
         <input
             className={inputClassNames}

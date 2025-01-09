@@ -1,9 +1,10 @@
-import {isArray, isFunction, isObject} from "../../utils"
+import {classNames, isArray, isFunction, isObject} from "../../utils"
 import {InputProps, InputRef} from "./type"
 import type { CompositionEvent, ChangeEvent, FocusEvent, KeyboardEvent } from "react";
-import {forwardRef, useImperativeHandle, useRef} from "react"
+import {forwardRef, useImperativeHandle, useRef, useState} from "react"
 import {useMergeState} from "../../hooks/useMergeState";
 import { useComposition } from "./hooks/useComposition";
+import { InputWrapper } from "./InputWrapper";
 
 export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   // props
@@ -19,6 +20,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   } = props
 
   // props派生数据
+  const inputClassNames = classNames('mini-input')
   const maxLength = isObject(propMaxLength)           // 绑定到input元素上的maxLength的值
       ? propMaxLength?.errorOnly
           ? undefined
@@ -29,6 +31,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
 
   // 元数据
   const inputRef = useRef<HTMLInputElement>(null) // input元素的ref实例
+  const [focus, setFocus] = useState<boolean>(false)
   const [value, setValue] = useMergeState<string>(
       '',
       {
@@ -100,8 +103,16 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   )
 
   return (
-      <div>
+      <InputWrapper
+        focus={focus}
+        onFocus={() => {
+          setFocus(true)
+          inputRef.current?.focus()
+        }}
+        suffix={suffix}
+      >
         <input
+            className={inputClassNames}
             ref={inputRef}
             {...rest}
             maxLength={maxLength}
@@ -109,6 +120,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
             onChange={valueChangeHandler}
             onBlur={(event: FocusEvent<HTMLInputElement>) => {
               props?.onBlur?.(event)
+              setFocus(false)
 
               const normalizeHandler = normalizeTriggerHandler("onBlur")
               normalizeHandler && triggerChange(normalizeHandler(value), event)
@@ -127,7 +139,6 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
             }}
             onKeyDown={keydownHandler}
         />
-        {suffix}
-      </div>
+      </InputWrapper>
   )
 })

@@ -1,4 +1,4 @@
-import {Input} from "@mini-ui/ui/src/components/Input/Input";
+import {Input} from "@mini-ui/ui";
 import "@mini-ui/ui/dist/components/Input/styles/index.css"
 import {useState} from "react";
 

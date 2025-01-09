@@ -1,7 +1,14 @@
-import {ChangeEvent, InputHTMLAttributes, ReactNode, CompositionEvent, KeyboardEvent} from "react";
+import {ChangeEvent, InputHTMLAttributes, ReactNode, CompositionEvent, KeyboardEvent, MouseEvent} from "react";
+
+interface CommonProps {
+  /**
+   * @zh Input组件中的后缀内容。
+   * */ 
+  suffix?: ReactNode;
+}
 
 export interface InputProps extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
+    InputHTMLAttributes<HTMLInputElement> & CommonProps,
     'onChange' | 'maxLength'
 > {
   /**
@@ -44,10 +51,6 @@ export interface InputProps extends Omit<
    * */
   showWordLimit?: boolean;
   /**
-   * @zh Input组件中的后缀内容。
-   * */ 
-  suffix?: ReactNode;
-  /**
    * @zh Input组件中格式化api
    * */ 
   normalize?: (value: string) => string;
@@ -60,6 +63,13 @@ export interface InputProps extends Omit<
    * */ 
   onPressEnter?: (event: KeyboardEvent<HTMLInputElement>) => void
 }
+
+export interface InputWrapperProps extends CommonProps {
+  focus: boolean;
+  onFocus: (e: MouseEvent<HTMLDivElement>) => void;
+  children: ReactNode
+}
+
 
 export interface InputRef {
   focus: () => void;

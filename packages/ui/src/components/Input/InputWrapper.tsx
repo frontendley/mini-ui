@@ -1,13 +1,6 @@
 import { CSSProperties, MouseEvent, ReactNode, useRef } from "react"
 import { classNames } from "../../utils"
-import { InputProps, InputRef } from "./type";
-
-interface InputWrapperProps {
-  suffix: ReactNode;
-  focus: boolean;
-  onFocus: (e: MouseEvent<HTMLDivElement>) => void;
-  children: ReactNode
-}
+import { InputRef, InputWrapperProps } from "./type";
 
 function computedElement(
   element?: ReactNode,
@@ -29,11 +22,8 @@ export function InputWrapper(props: InputWrapperProps) {
     onFocus,
     suffix,
     children,
-    ...rest
   } = props
 
-  // meta data
-  const inputRef = useRef<InputRef>(null)
 
   // 派生数据
   const baseCls = 'mini-input'
@@ -47,7 +37,6 @@ export function InputWrapper(props: InputWrapperProps) {
 
   // event
   const handleInputWrapperClick = (e: MouseEvent<HTMLDivElement>) => {
-    inputRef.current?.focus()
     onFocus?.(e)
   }
 

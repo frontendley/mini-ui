@@ -104,6 +104,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
 
   return (
       <InputWrapper
+        {...rest}
         focus={focus}
         onFocus={() => {
           setFocus(true)

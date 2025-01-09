@@ -5,6 +5,18 @@ interface CommonProps {
    * @zh Input组件中的后缀内容。
    * */ 
   suffix?: ReactNode;
+  /**
+   * @zh Input组件中的前缀内容
+   * */ 
+  prefix?: ReactNode;
+  /**
+   * @zh Input组件中的前置标签
+   * */ 
+  addonBefore?: ReactNode;
+  /**
+   * @zh Input组件中的后置标签
+   * */ 
+  addonAfter?: ReactNode
 }
 
 export interface InputProps extends Omit<

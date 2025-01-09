@@ -1,6 +1,6 @@
 import { CSSProperties, MouseEvent, ReactNode, useRef } from "react"
 import { classNames } from "../../utils"
-import { InputRef, InputWrapperProps } from "./type";
+import { InputWrapperProps } from "./type";
 
 function computedElement(
   element?: ReactNode,
@@ -20,7 +20,10 @@ export function InputWrapper(props: InputWrapperProps) {
   const {
     focus,
     onFocus,
+    prefix,
     suffix,
+    addonBefore,
+    addonAfter,
     children,
   } = props
 
@@ -45,8 +48,11 @@ export function InputWrapper(props: InputWrapperProps) {
       className={inputWrapperCls}
       onClick={handleInputWrapperClick}
     >
+      { computedElement(addonBefore, `${baseCls}-addon-before`)}
+      { computedElement(prefix, `${baseCls}-suffix`)}
       { children }
       { computedElement(suffix, `${baseCls}-suffix`)}
+      { computedElement(addonAfter, `${baseCls}-addon-after`)}
     </span>
   )
 }

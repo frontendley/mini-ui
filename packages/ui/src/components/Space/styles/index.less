@@ -1,0 +1,23 @@
+@import url("../../../styles/index.less");
+
+@space-prefix-cls: ~'@{prefix}-space';
+
+.align(@align) {
+  .@{space-prefix-cls}-@{align} {
+    align-items: ~'@{align}';
+  }
+}
+
+.@{space-prefix-cls} {
+  display: inline-flex;
+
+  &-vertical {
+    flex-direction: column;
+  }
+
+  .align(start);
+  .align(center);
+  .align(end);
+  .align(baseline);
+  
+}

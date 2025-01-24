@@ -1,4 +1,4 @@
-import { CSSProperties, forwardRef, Fragment } from "react";
+import { CSSProperties, forwardRef, Fragment, ReactElement, ReactNode } from "react";
 import { SpaceProps, SpaceSize } from "./interface";
 import { classNames as cls, getPrefix, isArray, isNumber } from "../../utils";
 import { toArray } from "./utils";
@@ -80,8 +80,9 @@ const Space = forwardRef<HTMLDivElement, SpaceProps>((props, ref) => {
     >
       {
         childrenNodes.map((child, index) => {
+          const key = (child as ReactElement)?.key || index
           return (
-            <Fragment>
+            <Fragment key={key}>
               <SpaceItem className={itemClassNames}>
                 {child}
               </SpaceItem>

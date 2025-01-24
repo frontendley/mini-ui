@@ -13,5 +13,10 @@
     "type": "file",
     "label": "输入框 input",
     "name": "input"
+  },
+  {
+    "type": "file",
+    "label": "间距 Space",
+    "name": "space"
   }
 ]

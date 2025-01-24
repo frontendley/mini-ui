@@ -1,0 +1,39 @@
+# Space组件
+
+## 基本用法
+- Space组件的基本用法
+<code src="../../../../demo/space/basic-space.tsx" />
+
+## 垂直间距
+- Space组件的垂直方向上分离
+<code src="../../../../demo/space/vertical-space.tsx" />
+
+## 不同尺寸的间距
+- Space组件的不同尺寸
+<code src="../../../../demo/space/size-space.tsx" />
+
+## 对齐方式
+<code src="../../../../demo/space/align-space.tsx" />
+
+## 分割符
+<code src="../../../../demo/space/split-space.tsx" />
+
+## 环绕包围
+<code src="../../../../demo/space/wrap-space.tsx" />
+
+|参数名|描述|类型版本|
+|---|---|---|
+|wrap|环绕类型的间距，用于折行的场景。|boolean |`-`|
+|align|对齐方式|'start' \| 'end' \| 'center' \| 'baseline' |`-`|
+|direction|间距方向|'vertical' \| 'horizontal' |`horizontal`|
+|split|设置分隔符|ReactNode |`-`|
+|className|节点类名|string \| string[] |`-`|
+|size|尺寸|[SpaceSize](#spacesize) \| [SpaceSize](#spacesize)[] |`small`|
+|style|节点样式|CSSProperties |`-`|
+
+
+### SpaceSize
+
+```js
+export type SpaceSize = "mini" | "small" | "medium" | "large" | number;
+```

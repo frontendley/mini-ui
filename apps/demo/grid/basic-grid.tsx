@@ -1,4 +1,5 @@
 import { Button, Grid, Space } from "@mini-ui/ui"
+import "@mini-ui/ui/dist/index.css"
 
 const { Row, Col } = Grid
 

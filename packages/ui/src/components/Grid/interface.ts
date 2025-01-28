@@ -21,5 +21,9 @@ export interface ColProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @zh 栅格占位数
    * */ 
-  span?: number
+  span?: number;
+  /**
+   * @zh 栅格偏移量
+   * */ 
+  offset?: number;
 }

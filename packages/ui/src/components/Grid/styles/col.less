@@ -3,7 +3,7 @@
 
 .generate-columns(@n) {
   .loop(@i) when (@i <= @n) {
-    .@{col-prefix}-@{i} {
+    &-col-@{i} {
       width: (@i * 100% / @n);
     }
     .loop(@i + 1);
@@ -11,4 +11,18 @@
   .loop(1); // 启动循环
 }
 
-.generate-columns(24);
+.generate-offset(@n) {
+  .loop(@i) when (@i <= @n) {
+    &-offset-@{i} {
+      margin-left: (@i * 100% / @n);
+    }
+    .loop(@i + 1);
+  }
+
+  .loop(1);
+}
+
+.@{col-prefix}{
+  .generate-columns(24);
+  .generate-offset(24);
+}

@@ -1,0 +1,14 @@
+@import url("../../../styles/index.less");
+@col-prefix: ~'@{prefix}-col';
+
+.generate-columns(@n) {
+  .loop(@i) when (@i <= @n) {
+    .@{col-prefix}-@{i} {
+      width: (@i * 100% / @n);
+    }
+    .loop(@i + 1);
+  }
+  .loop(1); // 启动循环
+}
+
+.generate-columns(24);

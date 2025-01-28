@@ -1,0 +1,31 @@
+@import url("../../../styles/index.less");
+
+@row-prefix: ~'@{prefix}-row';
+
+.justify-content(@justify) {
+  .@{row-prefix}-justify-@{justify} {
+    justify-content: ~'@{justify}';
+  }
+}
+
+.align-items(@align) {
+  .@{row-prefix}-align-@{align} {
+    align-items: ~'@{align}';
+  }
+}
+
+.@{row-prefix} {
+  display: flex;
+  flex-flow: row wrap;
+
+  .justify-content(start);
+  .justify-content(center);
+  .justify-content(end);
+  .justify-content(space-around);
+  .justify-content(space-between);
+  
+
+  .align-items(start);
+  .align-items(center);
+  .align-items(end);
+}

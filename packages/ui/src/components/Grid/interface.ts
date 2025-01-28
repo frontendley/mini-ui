@@ -1,6 +1,12 @@
 import { CSSProperties, HTMLAttributes } from "react";
+import { Breakpoint } from "../../hooks/useResponsiveObserver";
 
-type GridResponsiveBreakPoint = 'sm' | 'md' | 'lg' | 'xs' | 'xl' | 'xxl' | 'xxxl'
+export interface IRowContext {
+  gutter: [number, number]
+}
+
+
+export type Gutter = number | Partial<Record<Breakpoint, number>>
 
 export interface RowProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -14,7 +20,7 @@ export interface RowProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @zh 栅格间距
    * */ 
-  gutter?: number | Partial<Record<GridResponsiveBreakPoint, number>>
+  gutter?: Gutter | Gutter[]
 }
 
 export interface ColProps extends HTMLAttributes<HTMLDivElement> {

@@ -1,12 +1,22 @@
 [
   {
     "type": "dir",
-    "name": "basic",
+    "name": "base",
     "label": "基础指南"
   },
   {
     "type": "dir",
-    "name": "components",
-    "label": "组件"
+    "name": "basic",
+    "label": "基础组件"
+  },
+  {
+    "type": "dir",
+    "name": "layout",
+    "label": "布局组件"
+  },
+  {
+    "type": "dir",
+    "name": "inputs",
+    "label": "输入组件"
   }
 ]

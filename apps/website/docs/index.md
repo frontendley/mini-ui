@@ -6,7 +6,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /guide/basic/
+      link: /guide/base/
     - theme: alt
       text: Github
       link: https://github.com/frontendley/mini-ui

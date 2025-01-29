@@ -28,8 +28,6 @@ export const Row = (props: PropsWithChildren<RowProps>) => {
     xxxl: true,
   })
 
-  console.log(screenMap)
-
   // 派生数据
   // class name
   const prefix = getPrefix("row")

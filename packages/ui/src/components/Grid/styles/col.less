@@ -22,7 +22,19 @@
   .loop(1);
 }
 
+.generate-order(@n) {
+  .loop(@i) when (@i <= @n) {
+    &-order-@{i} {
+      order: @i;
+    }
+    .loop(@i + 1);
+  }
+
+  .loop(1);
+}
+
 .@{col-prefix}{
   .generate-columns(24);
   .generate-offset(24);
+  .generate-order(24);
 }

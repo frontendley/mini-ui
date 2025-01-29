@@ -8,6 +8,7 @@ export const Col = (props: PropsWithChildren<ColProps>) => {
   const {
     span = 24,
     offset = 0,
+    order,
     className,
     style,
     children,
@@ -25,7 +26,8 @@ export const Col = (props: PropsWithChildren<ColProps>) => {
     className,
     {
       [`${prefix}-col-${span}`]: span,
-      [`${prefix}-offset-${offset}`]: offset
+      [`${prefix}-offset-${offset}`]: offset,
+      [`${prefix}-order-${order}`]: order,
     }
   )
   // style 根据context gutter计算

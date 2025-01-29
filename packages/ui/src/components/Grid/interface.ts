@@ -32,4 +32,8 @@ export interface ColProps extends HTMLAttributes<HTMLDivElement> {
    * @zh 栅格偏移量
    * */ 
   offset?: number;
+  /**
+   * @zh 控制元素的展示排序
+   * */ 
+  order?: number;
 }

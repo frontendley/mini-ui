@@ -1,5 +1,5 @@
 import {ButtonHTMLAttributes, CSSProperties, ReactNode} from "react";
-export interface ButtonProps extends Omit<ButtonHTMLAttributes<any>, "className" | "type"> {
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLElement>, "className" | "type"> {
   /**
    * @desc 组件的几种变体形式
    * */  

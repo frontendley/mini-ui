@@ -2,7 +2,7 @@ import { CSSProperties, HTMLAttributes } from "react";
 import { Breakpoint } from "../../hooks/useResponsiveObserver";
 
 export interface IRowContext {
-  gutter: [number, number]
+  gutter: number[]
 }
 
 

@@ -86,6 +86,7 @@ class ResponsiveObserver {
     this.matchListeners = []
   }
   register() {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _this = this
     Object.entries(responsiveMap).forEach(([key, value]) => {
       function listener({ matches }: { matches: boolean }) {

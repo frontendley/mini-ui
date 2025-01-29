@@ -43,6 +43,7 @@ export function useComposition({
   const valueChangeHandler = (event: CompositionEvent<HTMLInputElement> | ChangeEvent<HTMLInputElement>) => {
     const newValue = (event.target as HTMLInputElement).value
     if (!isCompositionRef.current) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       compositionValue && setCompositionValue(undefined)
       // 处理英文直接输入值改变
       triggerChange(newValue, event)
@@ -59,6 +60,7 @@ export function useComposition({
     if(event.key === "Enter") {
       onPressEnter?.(event)
       const normalizeHandler = normalizeTriggerHandler('onPressEnter')
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       normalizeHandler && triggerChange(normalizeHandler(value), event)
     }
   }

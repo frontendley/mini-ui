@@ -47,7 +47,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
 
   // 派生数据
   let suffix = propSuffix
-  let isExceedWordLimit = realMaxLength && value?.length > realMaxLength
+  const isExceedWordLimit = realMaxLength && value?.length > realMaxLength
   if (showWordLimit) {
     const valueLength = value?.length
     suffix = (
@@ -62,11 +62,12 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
       setValue(value)
     }
 
-    isFunction(props.onChange) && props.onChange(value, event)
+    props.onChange?.(value, event)
   }
 
   // 处理清除事件
   const handleClear = (event: MouseEvent<HTMLSpanElement>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleChange('', event as any)
   }
 
@@ -102,10 +103,10 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
       () => {
         return {
           focus: () => {
-            isFunction(inputRef.current?.focus) && inputRef.current?.focus()
+            inputRef.current?.focus?.()
           },
           blur: () => {
-            isFunction(inputRef.current?.blur) && inputRef.current?.blur()
+            inputRef.current?.blur?.()
           },
           dom: inputRef.current
         }
@@ -140,6 +141,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
               setFocus(false)
 
               const normalizeHandler = normalizeTriggerHandler("onBlur")
+              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
               normalizeHandler && triggerChange(normalizeHandler(value), event)
             }}
             onCompositionStart={(event: CompositionEvent<HTMLInputElement>) => {

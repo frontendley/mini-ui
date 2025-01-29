@@ -34,6 +34,7 @@ export function Icon(props: IconProps): JSX.Element {
     fill: "currenColor",
     className: classNames,
     viewBox,
+    style,
     ...rest
   }
   // 处理Component
@@ -45,7 +46,7 @@ export function Icon(props: IconProps): JSX.Element {
 
   // 处理Children
   warning(
-    !Boolean(viewBox),
+    !viewBox,
     "Make sure that you provide correct ViewBox"
   ) 
   return (

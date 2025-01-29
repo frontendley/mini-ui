@@ -5,8 +5,6 @@ export function IconClose (props: IconProps): JSX.Element {
     className = "",
     spin,
     style,
-    component: Component,
-    children,
     ...rest
   } = props
   // 处理className
@@ -17,6 +15,7 @@ export function IconClose (props: IconProps): JSX.Element {
     height: "1em",
     fill: "currenColor",
     className: classNames,
+    style: style,
     ...rest
   }
 

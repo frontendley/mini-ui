@@ -34,6 +34,4 @@ export interface SpaceProps
   style?: CSSProperties
 }
 
-export interface SpaceItemProps 
-  extends HTMLAttributes<HTMLDivElement> {
-}
+export type SpaceItemProps = HTMLAttributes<HTMLDivElement> 

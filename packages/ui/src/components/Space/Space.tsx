@@ -1,4 +1,4 @@
-import { CSSProperties, forwardRef, Fragment, ReactElement, ReactNode } from "react";
+import { CSSProperties, forwardRef, Fragment, ReactElement } from "react";
 import { SpaceProps, SpaceSize } from "./interface";
 import { classNames as cls, getPrefix, isArray, isNumber } from "../../utils";
 import { toArray } from "./utils";

@@ -2,7 +2,6 @@ import {ButtonProps} from "./interface";
 import {
   getPrefix,
   classNames as cls,
-  isFunction
 } from "../../utils/";
 import { Icon } from "../Icon/Icon";
 import { MouseEventHandler } from "react";
@@ -36,10 +35,10 @@ export const Button = ({
 
   const handleClick: MouseEventHandler<HTMLElement> = (e) => {
     if(loading || disabled) {
-      isFunction(e?.preventDefault) && e.preventDefault();
+      e.preventDefault?.();
     }
 
-    onClick && onClick(e)
+    onClick?.(e)
   }
   return <button
       disabled={loading || disabled}

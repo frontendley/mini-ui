@@ -105,8 +105,6 @@ export function Icon${fileName} (props: IconProps): JSX.Element {
     className = "",
     spin,
     style,
-    component: Component,
-    children,
     ...rest
   } = props
   // 处理className
@@ -117,6 +115,7 @@ export function Icon${fileName} (props: IconProps): JSX.Element {
     height: "1em",
     fill: "currenColor",
     className: classNames,
+    style: style,
     ...rest
   }
 
@@ -133,6 +132,7 @@ async function generateIcon(records: IconRecord[]) {
     const template = iconTemplate(record)
     fs.writeFile(targetPath, template)
 
+    // eslint-disable-next-line no-console
     console.log("has generated " + record.fileName + "component")
   }
 
@@ -143,6 +143,7 @@ async function generateExportModule(records: IconRecord[]) {
   const targetPath = path.join(__dirname, "..", "src", "components", "index.tsx")
   const exportStr = records.map(item => `export { Icon${item.fileName} } from "./${item.fileName}"`).join('\n')
   fs.writeFile(targetPath, exportStr)
+  // eslint-disable-next-line no-console
   console.log("has generated export file")
 }
 

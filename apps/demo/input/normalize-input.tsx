@@ -10,7 +10,10 @@ export default function app () {
       <Input
         normalize={value => value.toLocaleLowerCase()}
         normalizeTrigger={['onPressEnter']}
-        onPressEnter={e => console.log("press enter")}
+        onPressEnter={e => {
+          // eslint-disable-next-line no-console
+          console.log("press enter", e)
+        }}
       />
     </div>
   )

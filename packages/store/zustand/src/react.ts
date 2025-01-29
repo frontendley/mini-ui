@@ -9,6 +9,7 @@ import { useSyncExternalStore } from "react"
  * */ 
 const useStore = <T,>(
   api: ReturnType<typeof createStore<T>>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   selector: (state: T) => any
 ) => {
   const slice = useSyncExternalStore(
@@ -22,6 +23,7 @@ const useStore = <T,>(
 const createImpl = <T,>(createStoreCb: TCreateStore<T>) => {
   const api = createStore(createStoreCb)
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const store = (selector: (state: T) => any) => useStore(api, selector)
 
   return Object.assign(store, api)

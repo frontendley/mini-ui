@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEvent, ReactNode, useRef } from "react"
+import { CSSProperties, MouseEvent, ReactNode } from "react"
 import { classNames } from "../../utils"
 import { InputWrapperProps } from "./type";
 import { IconClose } from "../../../../icons/src";

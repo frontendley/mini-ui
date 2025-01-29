@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react"
-import { getPrefix, classNames as cls, isArray, isNumber, isObject } from "../../utils"
+import { getPrefix, classNames as cls, isArray, isObject } from "../../utils"
 import { Gutter, RowProps } from "./interface"
 import { RowProvider } from "./context"
 import { responsiveArray, ScreenMap, useResponsiveObserver } from "../../hooks/useResponsiveObserver"
@@ -75,7 +75,7 @@ export const Row = (props: PropsWithChildren<RowProps>) => {
   }
 
   return (
-    <RowProvider value={rowContext as any}>
+    <RowProvider value={rowContext}>
       <div
         className={classNames}
         {...rest}

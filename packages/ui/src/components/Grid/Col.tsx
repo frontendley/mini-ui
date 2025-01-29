@@ -1,9 +1,9 @@
 import { CSSProperties, PropsWithChildren } from "react"
 import {ColProps} from "./interface"
-import { getPrefix, classNames as cls } from "../../utils"
+import { getPrefix, classNames as cls, isNumber, isObject } from "../../utils"
 import { useRowContext } from "./context"
 
-export const Col = (props: PropsWithChildren<ColProps>) => {
+  export const Col = (props: PropsWithChildren<ColProps>) => {
   // props 解构
   const {
     span = 24,
@@ -11,6 +11,13 @@ export const Col = (props: PropsWithChildren<ColProps>) => {
     order,
     className,
     style,
+    sm,
+    md,
+    lg,
+    xl, 
+    xs,
+    xxl,
+    xxxl,
     children,
     ...rest 
   } = props
@@ -25,18 +32,41 @@ export const Col = (props: PropsWithChildren<ColProps>) => {
     prefix,
     className,
     {
-      [`${prefix}-col-${span}`]: span,
+      [`${prefix}-span-${span}`]: span,
       [`${prefix}-offset-${offset}`]: offset,
       [`${prefix}-order-${order}`]: order,
-    }
+    },
+    getAddaptionClassName(prefix)
   )
   // style 根据context gutter计算
   const mergedStyle: CSSProperties = {
     padding: `${gutter[1] / 2}px ${gutter[0] / 2}px`,
     ...style
   }
-  console.log(mergedStyle)
 
+  // 辅助函数，获取响应式数据下的className
+  function getAddaptionClassName(prefix: string) {
+    const screenList = { xs, sm, md, lg, xl ,xxl, xxxl }
+
+    let mergedCls = {}
+    Object.entries(screenList).forEach(([screenKey, screenValue]) => {
+      if(isNumber(screenValue) && screenValue > 0) {
+        mergedCls = {
+          ...mergedCls, 
+          [`${prefix}-${screenKey}-span-${screenValue}`]: screenValue
+        }
+      } else if(isObject(screenValue)) {
+        mergedCls = {
+          ...mergedCls,
+          [`${prefix}-${screenKey}-span-${screenValue.span}`]: screenValue.span,
+          [`${prefix}-${screenKey}-offset-${screenValue.offset}`]: screenValue.offset,
+          [`${prefix}-${screenKey}-order-${screenValue.order}`]: screenValue.order
+        }
+      }
+    })
+
+    return mergedCls
+  }
   return (
     <div
     className={classNames}

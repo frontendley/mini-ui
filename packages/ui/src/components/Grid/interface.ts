@@ -36,4 +36,32 @@ export interface ColProps extends HTMLAttributes<HTMLDivElement> {
    * @zh 控制元素的展示排序
    * */ 
   order?: number;
+  /**
+   * @zh < 576px 响应式栅格
+   */
+  xs?: number | { [key: string]: unknown };
+  /**
+   * @zh >= 576px 响应式栅格
+   */
+  sm?: number | { [key: string]: unknown };
+  /**
+   * @zh >= 768px 响应式栅格
+   */
+  md?: number | { [key: string]: unknown };
+  /**
+   * @zh >= 992px 响应式栅格
+   */
+  lg?: number | { [key: string]: unknown };
+  /**
+   * @zh >= 1200px 响应式栅格
+   */
+  xl?: number | { [key: string]: unknown };
+  /**
+   * @zh >= 1600px 响应式栅格
+   */
+  xxl?: number | { [key: string]: unknown };
+  /**
+   * @zh >= 2000px 响应式栅格
+   */
+  xxxl?: number | { [key: string]: unknown };
 }

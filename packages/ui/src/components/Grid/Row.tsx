@@ -61,7 +61,7 @@ export const Row = (props: PropsWithChildren<RowProps>) => {
   function getGutter(_gutter: Gutter) {
     let result = 0;
     if(isObject(_gutter)) {
-      for(let breakpoint of responsiveArray) {
+      for(const breakpoint of responsiveArray) {
         if(_gutter[breakpoint] && screenMap[breakpoint]) {
           result = _gutter[breakpoint]
           break

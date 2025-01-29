@@ -1,9 +1,12 @@
 @import url("../../../styles/index.less");
 @col-prefix: ~'@{prefix}-col';
 
-.generate-columns(@n) {
+.generate-columns(@n, @screen) {
+
+  @adaption: if(@screen = '', ~'', ~'-@{screen}');
+
   .loop(@i) when (@i <= @n) {
-    &-col-@{i} {
+    &@{adaption}-span-@{i} {
       width: (@i * 100% / @n);
     }
     .loop(@i + 1);
@@ -11,9 +14,12 @@
   .loop(1); // 启动循环
 }
 
-.generate-offset(@n) {
+.generate-offset(@n, @screen) {
+
+  @adaption: if(@screen = '', ~'', ~'-@{screen}');
+  
   .loop(@i) when (@i <= @n) {
-    &-offset-@{i} {
+    &@{adaption}-offset-@{i} {
       margin-left: (@i * 100% / @n);
     }
     .loop(@i + 1);
@@ -22,9 +28,12 @@
   .loop(1);
 }
 
-.generate-order(@n) {
+.generate-order(@n, @screen) {
+
+  @adaption: if(@screen = '', ~'', ~'-@{screen}');
+
   .loop(@i) when (@i <= @n) {
-    &-order-@{i} {
+    &@{adaption}-order-@{i} {
       order: @i;
     }
     .loop(@i + 1);
@@ -34,7 +43,48 @@
 }
 
 .@{col-prefix}{
-  .generate-columns(24);
-  .generate-offset(24);
-  .generate-order(24);
+  .generate-columns(24, '');
+  .generate-offset(24, '');
+  .generate-order(24, '');
+
+  // adaptation
+  .generate-columns(24, xs);
+  .generate-offset(24, xs);
+  .generate-order(24, xs);
+
+  @media (width >= 576px) {
+    .generate-columns(24, sm);
+    .generate-offset(24, sm);
+    .generate-order(24, sm);
+  }
+
+  @media (width >= 768px) {
+    .generate-columns(24, md);
+    .generate-offset(24, md);
+    .generate-order(24, md);
+  }
+
+  @media (width >= 992px) {
+    .generate-columns(24, lg);
+    .generate-offset(24, lg);
+    .generate-order(24, lg);
+  }
+
+  @media (width >= 1200px) {
+    .generate-columns(24, xl);
+    .generate-offset(24, xl);
+    .generate-order(24, xl);
+  }
+
+  @media (width >= 1600px) {
+    .generate-columns(24, xxl);
+    .generate-offset(24, xxl);
+    .generate-order(24, xxl);
+  }
+
+  @media (width >= 2000px) {
+    .generate-columns(24, xxxl);
+    .generate-offset(24, xxxl);
+    .generate-order(24, xxxl);
+  }
 }

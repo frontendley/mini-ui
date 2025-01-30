@@ -24,10 +24,11 @@ class ResponsiveObserver {
   // 单例模式
   private static instance: ResponsiveObserver | null = null
   private responsiveMap: BreakpointMap | null = null
-  private token: number
-  private screenMap: ScreenMap
-  subscribers: MatchRecord[]
-  private matchListeners: { mql: MediaQueryList, listener: (e: MediaQueryListEvent) => void }[]
+  // 发布订阅
+  private token: number // 订阅的唯一标识
+  private screenMap: ScreenMap  // 屏幕的宽度的Map， 最终消费的数据。
+  private subscribers: MatchRecord[]  // 订阅者列表
+  private matchListeners: { mql: MediaQueryList, listener: (e: MediaQueryListEvent) => void }[] // 用来取消注册
 
   private constructor(responsiveMap: BreakpointMap) {
     this.screenMap = {}

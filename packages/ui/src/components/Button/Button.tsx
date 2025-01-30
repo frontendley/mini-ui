@@ -15,6 +15,7 @@ export const Button = ({
     long = false,
     shape = "square",
     className,
+    htmlType,
     children,
     onClick,
     ...rest
@@ -44,6 +45,7 @@ export const Button = ({
       disabled={loading || disabled}
       className={classNames}
       onClick={handleClick}
+      type={htmlType}
       {...rest}
   >
     {

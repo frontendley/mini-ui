@@ -1,39 +1,70 @@
-import { PropsWithChildren, ReactElement, useState } from "react"
+import { PropsWithChildren } from "react"
 import { FormItemProps } from "./interface"
+import { Control } from "./Control"
+import { Grid, RowProps } from "../Grid"
 import { useFormContext } from "./context"
-import React from "react"
+
+import { classNames as cls, getPrefix } from "../../utils"
+
+import "./styles/FormItem.less"
+
+const { Row, Col } = Grid
 
 export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
+
   // props
   const {
-    field,
-    children
+    label,
+    ...rest
   } = props
 
-  // context 
-  const { form } = useFormContext()
+  // context
+  const { 
+    labelCol,
+    wrapperCol,
+    layout 
+  } = useFormContext()
 
-  // status
-  const [value, setValue] = useState(form?.innerGetFieldValue(field))
+  // class names
+  const prefix = getPrefix("form-item")
+  const classNames = cls(
+    prefix,
+    {
+      [`${prefix}-layout-${layout}`]: layout
+    }
+  )
 
-  function onValueChange (value: string) {
-    setValue(value)
-    form?.innerSetFieldValue(field, value)
+  // 派生数据
+  const rowProps: RowProps = {
+    align: layout === "inline" ? "start" : undefined,
+    justify: layout === "inline" ? "flex-start" : undefined,
   }
 
-  function cloneChildElement() {
-    return React.cloneElement(
-      children as ReactElement,
-      {
-        value: value,
-        onChange: onValueChange
-      }  
-    )
-  }
+
 
   return (
-    <div>
-      { cloneChildElement() }
-    </div>
+    <Row
+      {...rowProps}
+      className={classNames}
+    >
+        <Col 
+          {...labelCol} 
+          className={cls(
+            labelCol?.className,
+            `${prefix}-label`
+          )}
+          >
+          <label>{label ? label + ": " : label} </label>        
+        </Col>
+        <Col 
+          {...wrapperCol}
+          className={cls(
+            wrapperCol?.className,
+            `${prefix}-value`
+          )}
+        >
+          <Control {...rest} />
+        </Col>
+      </Row>
   )
 }

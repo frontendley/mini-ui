@@ -1,0 +1,13 @@
+@import url("../../../styles/index.less");
+
+@form-item-prefix: ~'@{prefix}-form';
+
+.@{form-item-prefix} {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-inline {
+    flex-flow: row wrap;
+  }
+}

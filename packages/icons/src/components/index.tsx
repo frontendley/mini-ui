@@ -1,3 +1,5 @@
 export { IconAccountBook } from "./AccountBook"
 export { IconAlert } from "./Alert"
+export { IconCheck } from "./Check"
 export { IconClose } from "./Close"
+export { IconLoading } from "./Loading"

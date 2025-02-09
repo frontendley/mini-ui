@@ -13,7 +13,6 @@ export function IconAccountBook (props: IconProps): JSX.Element {
   const defaultProps:IconProps = {
     width: "1em",
     height: "1em",
-    fill: "currenColor",
     className: classNames,
     style: style,
     ...rest

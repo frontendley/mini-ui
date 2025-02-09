@@ -3,6 +3,7 @@ import { classNames as cls, getPrefix } from "../../utils";
 
 import { SwitchProps } from "./interface";
 import { useMergeState } from "../../hooks/useMergeState";
+import { IconLoading } from "../../../../icons/src";
 
 function Switch (props: SwitchProps) {
 
@@ -10,10 +11,15 @@ function Switch (props: SwitchProps) {
   const {
     className,
     loading,
+    disabled,
     type  = "circle",
     size = "default",
     checked,
     defaultChecked,
+    checkedText,
+    uncheckedText,
+    checkedIcon,
+    uncheckedIcon,
     onChange
   } = props
 
@@ -33,7 +39,8 @@ function Switch (props: SwitchProps) {
     prefix,
     {
       [`${prefix}-type-${type}`]: type,
-      [`${prefix}-size-${size}`]: size,
+      [`${prefix}-${size}`]: size,
+      [`${prefix}-loading`]: loading,
       [`${prefix}-checked`]: mergedChecked
     },
     className
@@ -58,11 +65,37 @@ function Switch (props: SwitchProps) {
 
   return (
     <button
+      disabled={disabled}
       role="switch"
       className={classNames}
       onClick={handleClick} 
     >
-      <div className={`${prefix}-dot`}></div>
+      <div className={`${prefix}-dot`}>
+      {!loading && (checkedIcon || uncheckedIcon) && (
+              <span className={`${prefix}-dot-icon`}>
+                {mergedChecked ? checkedIcon : uncheckedIcon}
+              </span>
+        )}
+
+        {loading && (
+          <span className={`${prefix}-dot-icon`}>
+            <IconLoading spin/>
+          </span>
+        )}
+      </div>
+
+      {size !== 'small' && type !== 'line' && (checkedText || uncheckedText) && (
+        <>
+          <div className={`${prefix}-text-holder`}>
+            {checkedText && mergedChecked && checkedText}
+            {uncheckedText && !mergedChecked && uncheckedText}
+          </div>
+            <div className={`${prefix}-text`}>
+              {checkedText && mergedChecked && checkedText}
+              {uncheckedText && !mergedChecked && uncheckedText}
+            </div>
+        </>
+      )}
     </button>
   )
 }

@@ -1,4 +1,4 @@
-import { CSSProperties, HTMLAttributes, MouseEvent } from "react";
+import { CSSProperties, HTMLAttributes, MouseEvent, ReactNode } from "react";
 
 export interface SwitchProps extends 
   Omit<HTMLAttributes<HTMLButtonElement>, 'className' | 'onChange'> {
@@ -34,6 +34,22 @@ export interface SwitchProps extends
    * @zh 节点样式
    * */ 
   style?: CSSProperties;
+  /**
+   * @zh 开关打开时的文案， small尺寸不生效
+   * */ 
+  checkedText?: ReactNode;
+  /**
+   * @zh 开关关闭时的文案， small尺寸不生效
+   * */ 
+  uncheckedText?: ReactNode;
+  /**
+   * @zh 开关打开时的图标， small尺寸不生效
+   * */ 
+  checkedIcon?: ReactNode;
+  /**
+     * @zh 开关关闭时的图标， small尺寸不生效
+  * */ 
+  uncheckedIcon?: ReactNode;
   /**
    * @zh 点击开关的回调函数
    * */ 

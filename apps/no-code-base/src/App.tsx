@@ -3,8 +3,8 @@ import "./App.css"
 
 function App() {
   return (
-    <div className="w-52 h-52 bg-amber-50">
-      <Editor />
+    <div className="w-[100vw] h-[100vh]">
+        <Editor />
     </div>
   )
 }

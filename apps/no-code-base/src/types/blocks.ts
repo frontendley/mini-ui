@@ -20,3 +20,6 @@ export type TextBlockType= BaseBlock & {
     text: string;
   }
 }
+
+
+export type BlockProtocol = TextBlockType

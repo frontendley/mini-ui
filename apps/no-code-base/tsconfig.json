@@ -2,5 +2,13 @@
   "files": [],
   "extends": [
     "../../tsconfig.json"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "esModuleInterop": true,
+  },
+  "include": [
+    "vite.config.ts"
   ]
 }

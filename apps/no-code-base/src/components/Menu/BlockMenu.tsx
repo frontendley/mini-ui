@@ -1,3 +1,9 @@
+import { useDrag } from "react-dnd"
+
+type BlockMenuItemType = {
+  type: string;
+  name: string;
+}
 
 const BLOCK_MENUS = [
   {
@@ -23,14 +29,7 @@ export function BlockMenu() {
               <div className="w-full flex flex-wrap justify-start gap-[1%] box-border px-2">
                 {
                   group.blocks?.map(block => {
-                    return (
-                      <div 
-                        className="w-[32%] box-border py-1 text-center border"
-                        key={group.type + block.type}
-                      >
-                        { block.name }  
-                      </div>
-                    )
+                        return <BlockMenuItem key={group.type + block.type} { ...block } />
                   })
                 }
               </div>
@@ -39,5 +38,30 @@ export function BlockMenu() {
         })
       } 
     </div>
+  )
+}
+
+function BlockMenuItem(props: BlockMenuItemType) {
+  const { type, name } = props
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, dragRef] = useDrag(
+    () => ({
+      type: type,
+      item: {
+        type,
+        name
+      }
+    })
+  )
+
+  return (
+    <div
+      ref={dragRef}
+      className="w-[32%] box-border py-1 text-center border"
+    >
+      { name }  
+    </div>
+
   )
 }

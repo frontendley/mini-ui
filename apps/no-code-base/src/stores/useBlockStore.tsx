@@ -13,7 +13,8 @@ export interface BlockStore {
   initialBlocks: (block: BlockStore['blocks']) => void;
   initialBlocksTree: (blocksTree: BlockStore['blocksTree']) => void;
   insertBlock: (block: BlockProtocol['type']) => void;
-  setActiveBlock: (id: string) => void
+  setActiveBlock: (id: string) => void;
+  updateBlocks: (block: BlockProtocol) => void
 }
 
 export const useBlockStore = create<BlockStore>((set, get) => {
@@ -61,6 +62,16 @@ export const useBlockStore = create<BlockStore>((set, get) => {
       set(() => {
         return {
           activeBlock: get().blocks[id]
+        }
+      })
+    },
+    updateBlocks: (block: BlockProtocol) => {
+      set(state => {
+        return {
+          blocks: {
+            ...state.blocks,
+            [block.id]: block
+          }
         }
       })
     }

@@ -16,7 +16,9 @@
     "react-dnd": "16.0.1",
     "react-dnd-html5-backend": "16.0.1",
     "zustand": "5.0.3",
-    "@mini-ui/ui": "workspace:*"
+    "@mini-ui/ui": "workspace:*",
+    "@formily/core": "2.3.2",
+    "@formily/react": "2.3.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

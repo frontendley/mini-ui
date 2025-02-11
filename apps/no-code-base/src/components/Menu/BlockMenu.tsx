@@ -13,6 +13,10 @@ const BLOCK_MENUS = [
       {
         type: "text",
         name: "文本组件"
+      },
+      {
+        type: "button",
+        name: "按钮组件"
       }
     ]
   }

@@ -1,3 +1,5 @@
+import { ButtonProps } from "@mini-ui/ui";
+
 
 interface SizeType {
   width: number;
@@ -21,5 +23,10 @@ export type TextBlockType= BaseBlock & {
   }
 }
 
+export type ButtonBlockType = Omit<BaseBlock, 'props'> & {
+  props: ButtonProps
+}
+
 
 export type BlockProtocol = TextBlockType
+  | ButtonBlockType

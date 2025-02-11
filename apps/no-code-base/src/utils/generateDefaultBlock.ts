@@ -5,6 +5,10 @@ export function generateDefaultBlock(type: BlockProtocol['type']):BlockProtocol 
   switch(type){
     case "text":
       return defaults["textDefault"]
+    
+    case "button":
+      return defaults["buttonDefault"]
+      
     default:
       return null
   }

@@ -10,7 +10,7 @@ export function Canvas() {
 
   // handle drag and drop
   const [ {canDrop}, dropRef] = useDrop(() => ({
-    accept: [ 'text' ],
+    accept: [ 'text', 'button' ],
     drop: (item: { type: string }) => {
       insertBlock(item.type)
     },

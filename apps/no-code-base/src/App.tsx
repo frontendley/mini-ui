@@ -3,6 +3,7 @@ import "./App.css"
 import { Header } from "./components/Header/Header"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
+import "@mini-ui/ui/dist/index.css"
 
 function App() {
   return (

@@ -1,9 +1,8 @@
 import { ButtonBlockType } from "../../types/blocks";
 
-export const buttonDefault: ButtonBlockType = {
+export const BUTTON_DEFAULT: Omit<ButtonBlockType, 'id'> = {
   title: "按钮",
   type: "button",
-  id: `button-${Date.now()}`,
   props: {
     type: "primary",
     children: "button"

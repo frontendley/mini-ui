@@ -1,9 +1,8 @@
 import { TextBlockType } from "../../types/blocks";
 
-export const textDefault:TextBlockType = {
+export const TEXT_DEFAULT: Omit<TextBlockType, 'id'> = {
   title: "文本",
   type: "text",
-  id: `text-${Date.now()}`,
   props: {
     size: {
       width: 10,

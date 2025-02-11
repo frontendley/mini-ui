@@ -11,19 +11,21 @@ interface SizeType {
 export interface BaseBlock {
   id: string;
   title: string;
-  type: string;
+  type: 'text' | 'button';
   props: {
     size: SizeType;
   }
 }
 
 export type TextBlockType= BaseBlock & {
+  type: 'text',
   props: {
     text: string;
   }
 }
 
 export type ButtonBlockType = Omit<BaseBlock, 'props'> & {
+  type: 'button',
   props: ButtonProps
 }
 

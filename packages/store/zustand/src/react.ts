@@ -2,15 +2,16 @@ import { createStore } from "./vanilla"
 import { TCreateStore } from "./type"
 import { useSyncExternalStore } from "react"
 
+const identity = <T>(arg: T): T => arg
 /**
  * @desc 连接发布订阅、状态、react特性
  * - 通过useSyncExternalStore接入外部状态。
  * - 通过selector实现快照获取，达到细粒度更新的效果。
  * */ 
-const useStore = <T,>(
+const useStore = <T, S>(
   api: ReturnType<typeof createStore<T>>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  selector: (state: T) => any
+  selector: (state: T) => S = identity as any 
 ) => {
   const slice = useSyncExternalStore(
     api.subscribe,

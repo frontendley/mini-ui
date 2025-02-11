@@ -1,4 +1,4 @@
-import { BlockSetting } from "./components/BlockSetting";
+import { SettingPanel } from "./components/SettingPanel";
 import { Canvas } from "./components/Canvas";
 import { LeftPanel } from "./components/LeftPanel";
 
@@ -7,7 +7,7 @@ export default function Editor() {
     <div className="w-ful h-full flex grow">
       <LeftPanel /> 
       <Canvas />
-      <BlockSetting />
+      <SettingPanel />
     </div>
   )
 } 

@@ -1,4 +1,4 @@
-import { create } from "@mini/zustand";
+import { create } from "zustand";
 import { BlockProtocol } from "../types/blocks";
 import { generateDefaultBlock } from "../utils";
 
@@ -9,15 +9,18 @@ export type BlocksTree = Pick<BlockProtocol, 'id' | 'type'> & {
 export interface BlockStore {
   blocksTree: BlocksTree[];
   blocks: Record<string, BlockProtocol>;
+  activeBlock: null | BlockProtocol;
   initialBlocks: (block: BlockStore['blocks']) => void;
   initialBlocksTree: (blocksTree: BlockStore['blocksTree']) => void;
   insertBlock: (block: BlockProtocol['type']) => void;
+  setActiveBlock: (id: string) => void
 }
 
-export const useBlockStore = create<BlockStore>((set) => {
+export const useBlockStore = create<BlockStore>((set, get) => {
   return {
     blocksTree: [],
     blocks: {},
+    activeBlock: null,
     initialBlocks: (blocks: BlockStore['blocks']) => {
       set((state) => {
         return {
@@ -51,6 +54,13 @@ export const useBlockStore = create<BlockStore>((set) => {
             ...state.blocks,
             [block.id]: block
           }
+        }
+      })
+    },
+    setActiveBlock: (id: string) => {
+      set(() => {
+        return {
+          activeBlock: get().blocks[id]
         }
       })
     }

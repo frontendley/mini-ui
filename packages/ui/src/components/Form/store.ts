@@ -9,7 +9,7 @@ export class Store<
   store: Partial<FormData>;
   initialValues: Partial<FormData>;
 
-  private subscribers: StoreSubscriberProtocol<FormData> = {}
+  subscribers: StoreSubscriberProtocol<FormData> = {}
 
   // private registerFieldChangeCallbacks: Partial<Record<FieldKey, ((value: unknown) => void)>>;  // 注册的回调函数，主要用于外界操作store。
 

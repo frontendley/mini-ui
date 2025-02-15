@@ -41,6 +41,10 @@ export interface FormContextType {
    * @zh 表单的布局
    * */
   layout?: FormLayout
+  /**
+   * @zh 标签的文本对齐方式
+   * */ 
+  labelAlign?: 'left' | 'right'
 
   /**
    * @zh label 栅格布局的比例
@@ -77,6 +81,10 @@ export interface FormItemProps {
    * @zh 标签的文本
    * */
   label?: string;
+  /**
+   * @zh 标签的文本对齐方式
+   * */ 
+  labelAlign?: 'left' | 'right'
   /**
    * @zh 受控组件的唯一标识
    * */
@@ -116,6 +124,11 @@ export interface FormProps<FormData> {
    * @zh 设置form表单的初始值
    * */
   initialValue?: Partial<FormData>
+
+  /**
+   * @zh 标签的文本对齐方式
+   * */ 
+  labelAlign?: 'left' | 'right'
 }
 
 export interface FormItemTipProps {

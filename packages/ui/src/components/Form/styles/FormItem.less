@@ -11,6 +11,7 @@
 
     .@{form-item-prefix}-label {
       margin-bottom: @spacing-3;
+      display: flex;
     }
   }
 
@@ -20,6 +21,19 @@
     .@{form-item-prefix}-label {
       width: auto;
       margin-right: @spacing-3;
+    }
+  }
+
+
+  .@{form-item-prefix}-label {
+    display: flex;
+
+    &-left {
+      justify-content: flex-start;
+    }
+
+    &-right {
+      justify-content: flex-end;
     }
 
     .@{form-item-prefix}-value {

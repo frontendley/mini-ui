@@ -44,6 +44,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
   // props
   const {
     label,
+    labelAlign: labelAlignProps,
     ...rest
   } = props
 
@@ -53,6 +54,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
 
   // context
   const {
+    labelAlign,
     labelCol,
     wrapperCol,
     layout,
@@ -69,6 +71,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
   )
 
   // 派生数据
+  const mergedLabelAlign = labelAlignProps || labelAlign
   const rowProps: RowProps = {
     align: layout === "inline" ? "start" : undefined,
     justify: layout === "inline" ? "flex-start" : undefined,
@@ -111,7 +114,8 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
             {...labelCol}
             className={cls(
                 labelCol?.className,
-                `${prefix}-label`
+                `${prefix}-label`,
+                `${prefix}-label-${mergedLabelAlign}`
             )}
         >
           <label>{label ? label + ": " : label} </label>

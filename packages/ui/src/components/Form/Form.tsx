@@ -13,8 +13,9 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
     form,
     initialValue,
     layout = 'horizontal',
+    labelAlign = 'left',
     labelCol = { span: 5 },
-    wrapperCol = { span: 19 },
+    wrapperCol = { span: 18, offset: 1},
     children
   } = props
 
@@ -30,6 +31,7 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
   const formContext = { // form 组件的上下文
     form: formInstance,
     layout: layout,
+    labelAlign,
     labelCol,
     wrapperCol
   }

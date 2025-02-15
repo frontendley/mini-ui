@@ -14,7 +14,7 @@ export default function App () {
   const form = useForm()
 
   return ( 
-    <Space direction="vertical" size="middle">
+    <Space direction="vertical" size="middle" style={{width: '500px'}}>
       <Space>
         {
           layoutList.map(item => {
@@ -35,7 +35,7 @@ export default function App () {
         }
       </Space>
       <Form form={form} layout={layout}>
-        <FormItem label="name" field="name">
+        <FormItem label="name" field="name" labelAlign="right">
           <Input placeholder="请输入姓名" />
         </FormItem>
         <FormItem label="hobby" field="hobby">

@@ -50,6 +50,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     labelCol: labelColProps,
     wrapperCol: wrapperColProps,
     requiredSymbol: requiredSymbolProps,
+    colon: colonProps,
     ...rest
   } = props
 
@@ -63,7 +64,8 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     labelCol,
     wrapperCol,
     layout,
-    requiredSymbol
+    requiredSymbol,
+    colon
   } = useFormContext()
 
   // 合并 context 传递数据和 props 传递的数据
@@ -72,6 +74,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
   const mergedLabelCol = labelColProps || labelCol
   const mergedWrapperCol = wrapperColProps || wrapperCol
   const mergedRequiredSymbol = requiredSymbolProps || requiredSymbol
+  const mergedColon = colonProps || colon
 
 
   // class names
@@ -117,9 +120,6 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     return undefined
   }
 
-  // 获取 symbol 组件
-  // function get 
-
   return (
       <Row
           {...rowProps}
@@ -138,6 +138,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
             label={label}
             requiredSymbol={mergedRequiredSymbol}
             rules={props.rules}
+            colon={mergedColon}
           />
         </Col>
         <Col

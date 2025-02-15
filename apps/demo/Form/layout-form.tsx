@@ -1,3 +1,4 @@
+import { IconCheck } from "@mini-ui/icons";
 import { Button, Form, FormItem, Input, Space } from "@mini-ui/ui";
 import { useForm } from "@mini-ui/ui/src";
 import { useState } from "react";
@@ -35,10 +36,10 @@ export default function App () {
         }
       </Space>
       <Form form={form} layout={layout}>
-        <FormItem label="name" field="name" labelAlign="right" rules={[{required: true}]}>
+        <FormItem label="name" field="name" labelAlign="left" rules={[{required: true}]}>
           <Input placeholder="请输入姓名" />
         </FormItem>
-        <FormItem label="age" field="age" requiredSymbol={{position: 'end'}} rules={[{required: true}]}>
+        <FormItem label="age" field="age" requiredSymbol={{position: 'end'}} rules={[{required: true}]} colon={<span><IconCheck></IconCheck></span>}>
           <Input placeholder="请输入年纪" />
         </FormItem>
         <FormItem label="hobby" field="hobby">

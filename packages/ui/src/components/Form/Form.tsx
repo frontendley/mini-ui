@@ -13,10 +13,11 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
     form,
     initialValue,
     layout = 'horizontal',
-    labelAlign = 'left',
+    labelAlign = 'right',
     labelCol = { span: 5 },
     wrapperCol = { span: 18, offset: 1},
     requiredSymbol = true,
+    colon = false,
     children
   } = props
 
@@ -35,7 +36,8 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
     labelAlign,
     labelCol,
     wrapperCol,
-    requiredSymbol
+    requiredSymbol,
+    colon
   }
   // class names
   const prefix = getPrefix("form")

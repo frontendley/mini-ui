@@ -59,6 +59,11 @@ export interface CommonProps {
    * @zh 是否在 required 的时候显示加重的红色星号， 可通过设置 position 设定展示在 label 的位置（'start' | 'end'）
    * */ 
   requiredSymbol?: boolean | { position: "start" | "end" }
+
+  /**
+   * @zh 是否显示标签后的一个冒号
+   * */ 
+  colon?: boolean | ReactNode
 }
 
 export interface FormContextType extends CommonProps {

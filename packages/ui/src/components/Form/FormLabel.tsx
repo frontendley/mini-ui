@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 import { FormItemProps } from "./interface";
-import { isObject } from 'lodash-es';
+import { isBoolean, isObject } from 'lodash-es';
 
 interface FormLabelProps 
-  extends Pick<FormItemProps, 'label' | 'requiredSymbol' | 'rules'> {
+  extends Pick<FormItemProps, 'label' | 'requiredSymbol' | 'rules' | 'colon'> {
     prefix: string;
   }
 
@@ -12,7 +12,8 @@ export function FormLabel(props: FormLabelProps) {
     prefix,
     label,
     requiredSymbol,
-    rules
+    rules,
+    colon
   } = props
 
   // 派生数据
@@ -31,7 +32,10 @@ export function FormLabel(props: FormLabelProps) {
       {
         requiredSymbolPosition === 'start' && symbolIcon
       }
-      <label>{label ? label + ": " : label} </label>
+      <label>
+        {label} 
+      </label>
+      {colon && label &&  (isBoolean(colon) ? " : " : colon)}
       {
         requiredSymbolPosition === 'end' && symbolIcon
       }

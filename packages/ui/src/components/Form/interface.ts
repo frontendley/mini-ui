@@ -54,6 +54,11 @@ export interface CommonProps {
    * @zh value 容器的布局比例
    * */
   wrapperCol?: ColProps;
+
+  /**
+   * @zh 是否在 required 的时候显示加重的红色星号， 可通过设置 position 设定展示在 label 的位置（'start' | 'end'）
+   * */ 
+  requiredSymbol?: boolean | { position: "start" | "end" }
 }
 
 export interface FormContextType extends CommonProps {

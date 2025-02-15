@@ -8,6 +8,7 @@ import { classNames as cls, getPrefix } from "../../utils"
 
 import "./styles/FormItem.less"
 import { Space } from "../Space"
+import { FormLabel } from "./FormLabel"
 
 const { Row, Col } = Grid
 
@@ -48,6 +49,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     layout: layoutProps,
     labelCol: labelColProps,
     wrapperCol: wrapperColProps,
+    requiredSymbol: requiredSymbolProps,
     ...rest
   } = props
 
@@ -61,6 +63,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     labelCol,
     wrapperCol,
     layout,
+    requiredSymbol
   } = useFormContext()
 
   // 合并 context 传递数据和 props 传递的数据
@@ -68,6 +71,7 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
   const mergedLayout = layoutProps || layout
   const mergedLabelCol = labelColProps || labelCol
   const mergedWrapperCol = wrapperColProps || wrapperCol
+  const mergedRequiredSymbol = requiredSymbolProps || requiredSymbol
 
 
   // class names
@@ -113,6 +117,9 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     return undefined
   }
 
+  // 获取 symbol 组件
+  // function get 
+
   return (
       <Row
           {...rowProps}
@@ -126,7 +133,12 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
                 `${prefix}-label-${mergedLabelAlign}`
             )}
         >
-          <label>{label ? label + ": " : label} </label>
+          <FormLabel 
+            prefix={prefix}
+            label={label}
+            requiredSymbol={mergedRequiredSymbol}
+            rules={props.rules}
+          />
         </Col>
         <Col
             {...mergedWrapperCol}

@@ -27,6 +27,8 @@
 
   .@{form-item-prefix}-label {
     display: flex;
+    align-items: center;
+    gap: @spacing-2;
 
     &-left {
       justify-content: flex-start;
@@ -36,9 +38,14 @@
       justify-content: flex-end;
     }
 
-    .@{form-item-prefix}-value {
-      width: auto;
+    .@{form-item-prefix}-symbol {
+      font-size: .4em;
+      color: red;
     }
+  }
+
+  .@{form-item-prefix}-value {
+    width: auto;
   }
 
   &-tips {

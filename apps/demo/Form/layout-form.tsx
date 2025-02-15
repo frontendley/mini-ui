@@ -35,8 +35,11 @@ export default function App () {
         }
       </Space>
       <Form form={form} layout={layout}>
-        <FormItem label="name" field="name" labelAlign="right">
+        <FormItem label="name" field="name" labelAlign="right" rules={[{required: true}]}>
           <Input placeholder="请输入姓名" />
+        </FormItem>
+        <FormItem label="age" field="age" requiredSymbol={{position: 'end'}} rules={[{required: true}]}>
+          <Input placeholder="请输入年纪" />
         </FormItem>
         <FormItem label="hobby" field="hobby">
           <Input placeholder="请输入爱好" />

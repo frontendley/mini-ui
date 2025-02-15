@@ -45,6 +45,9 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
   const {
     label,
     labelAlign: labelAlignProps,
+    layout: layoutProps,
+    labelCol: labelColProps,
+    wrapperCol: wrapperColProps,
     ...rest
   } = props
 
@@ -60,21 +63,26 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     layout,
   } = useFormContext()
 
+  // 合并 context 传递数据和 props 传递的数据
+  const mergedLabelAlign = labelAlignProps || labelAlign
+  const mergedLayout = layoutProps || layout
+  const mergedLabelCol = labelColProps || labelCol
+  const mergedWrapperCol = wrapperColProps || wrapperCol
+
 
   // class names
   const prefix = getPrefix("form-item")
   const classNames = cls(
       prefix,
       {
-        [`${prefix}-layout-${layout}`]: layout
+        [`${prefix}-mergedLayout-${mergedLayout}`]: mergedLayout
       }
   )
 
   // 派生数据
-  const mergedLabelAlign = labelAlignProps || labelAlign
   const rowProps: RowProps = {
-    align: layout === "inline" ? "start" : undefined,
-    justify: layout === "inline" ? "flex-start" : undefined,
+    align: mergedLayout === "inline" ? "start" : undefined,
+    justify: mergedLayout === "inline" ? "flex-start" : undefined,
   }
 
   const validateStatus = computeValidateStatus(
@@ -111,9 +119,9 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
           className={classNames}
       >
         <Col
-            {...labelCol}
+            {...mergedLabelCol}
             className={cls(
-                labelCol?.className,
+                mergedLabelCol?.className,
                 `${prefix}-label`,
                 `${prefix}-label-${mergedLabelAlign}`
             )}
@@ -121,9 +129,9 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
           <label>{label ? label + ": " : label} </label>
         </Col>
         <Col
-            {...wrapperCol}
+            {...mergedWrapperCol}
             className={cls(
-                wrapperCol?.className,
+                mergedWrapperCol?.className,
                 `${prefix}-value`
             )}
         >

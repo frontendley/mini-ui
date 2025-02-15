@@ -31,20 +31,19 @@ export type StoreSubscriberProtocol<FormData> = Record<
   }
 >
 
-export interface FormContextType {
+/**
+ * @desc FormContext 和 FormItem 和 FormProps 共用的 API
+ * */ 
+export interface CommonProps {
   /**
-   * @zh form实例
-   * */
-  form?: Store
+   * @zh 标签的文本对齐方式
+   * */ 
+  labelAlign?: 'left' | 'right'
 
   /**
    * @zh 表单的布局
    * */
   layout?: FormLayout
-  /**
-   * @zh 标签的文本对齐方式
-   * */ 
-  labelAlign?: 'left' | 'right'
 
   /**
    * @zh label 栅格布局的比例
@@ -55,6 +54,44 @@ export interface FormContextType {
    * @zh value 容器的布局比例
    * */
   wrapperCol?: ColProps;
+}
+
+export interface FormContextType extends CommonProps {
+  /**
+   * @zh form实例
+   * */
+  form?: Store
+}
+
+export interface FormItemProps extends CommonProps {
+  /**
+   * @zh 标签的文本
+   * */
+  label?: string;
+  /**
+   * @zh 受控组件的唯一标识
+   * */
+  field?: FieldKeyType;
+  /**
+   * @zh 字段的校验规则
+   * */
+  rules?: RuleProps[]
+  /**
+   * @zh 校验状态
+   * */ 
+  validateStatus?: 'success' | 'warning' | 'error' | 'validating';
+}
+
+export interface FormProps<FormData> extends CommonProps {
+  /**
+   * @zh 表单实例
+   * */
+  form?: Store<FormData>;
+
+  /**
+   * @zh 设置form表单的初始值
+   * */
+  initialValue?: Partial<FormData>
 }
 
 export interface ControlProps {
@@ -74,61 +111,6 @@ export interface ControlProps {
    * @zh 发生错误时的调用函数
    * */
   onError?: (error: FieldErrorType) => void
-}
-
-export interface FormItemProps {
-  /**
-   * @zh 标签的文本
-   * */
-  label?: string;
-  /**
-   * @zh 标签的文本对齐方式
-   * */ 
-  labelAlign?: 'left' | 'right'
-  /**
-   * @zh 受控组件的唯一标识
-   * */
-  field?: FieldKeyType;
-  /**
-   * @zh 字段的校验规则
-   * */
-  rules?: RuleProps[]
-  /**
-   * @zh 校验状态
-   * */ 
-  validateStatus?: 'success' | 'warning' | 'error' | 'validating';
-}
-
-export interface FormProps<FormData> {
-  /**
-   * @zh 表单实例
-   * */
-  form?: Store<FormData>;
-
-  /**
-   * @zh 表单的布局
-   * */
-  layout?: FormLayout;
-
-  /**
-   * @zh label 栅格布局的比例
-   * */
-  labelCol?: ColProps;
-
-  /**
-   * @zh value 容器的布局比例
-   * */
-  wrapperCol?: ColProps;
-
-  /**
-   * @zh 设置form表单的初始值
-   * */
-  initialValue?: Partial<FormData>
-
-  /**
-   * @zh 标签的文本对齐方式
-   * */ 
-  labelAlign?: 'left' | 'right'
 }
 
 export interface FormItemTipProps {

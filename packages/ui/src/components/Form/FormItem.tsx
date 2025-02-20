@@ -53,7 +53,6 @@ export const FormItem = (props: PropsWithChildren<FormItemProps>) => {
     colon: colonProps,
     ...rest
   } = props
-
   // status
   const [errors, setErrors] = useState<FieldErrorType>()
 

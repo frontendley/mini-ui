@@ -22,12 +22,22 @@ export type RuleProps = SchemaRuleType & {
 }
 
 /**
+ * @desc 当 Store 被触发需要直接修改 Control 内部值时的 info 类型。
+ * */ 
+export interface StoreChangeInfo<FormData> {
+  field?: FieldKeyType;
+  value?: FormData[keyof FormData];
+  errors?: FieldErrorType;
+}
+
+/**
  * @desc 注册进入store的回调函数的协议
  * */ 
 export type StoreSubscriberProtocol<FormData> = Record<
   FieldKeyType, 
   {
-    validate: (value?: FormData[keyof FormData]) => void
+    validate: (value?: FormData[keyof FormData]) => Promise<FieldErrorType>;
+    onStoreChange: (info: StoreChangeInfo<FormData>) => void
   }
 >
 
@@ -97,11 +107,26 @@ export interface FormProps<FormData> extends CommonProps {
    * @zh 表单实例
    * */
   form?: Store<FormData>;
-
   /**
    * @zh 设置form表单的初始值
    * */
   initialValue?: Partial<FormData>
+  /**
+   * @zh 表单项值改变时触发， 和 onValuesChange 不同的是只会在用户操作表单项时触发。 
+   * */ 
+  onChange?: (value: Partial<FormData>, values: Partial<FormData>) => void;
+  /**
+   * @zh 任意表单项值改变时候触发。第一个参数是被改变表单项的值，第二个参数是所有的表单项值
+   * */ 
+  onValuesChange?: (value: Partial<FormData>, values: Partial<FormData>) => void;
+  /**
+   * @zh 数据验证成功后的回调事件
+   * */ 
+  onSubmit?: (values: FormData) => void;
+  /**
+   * @zh 数据验证失败后回调事件
+   * */ 
+  onSubmitFaild?: (errors: FieldErrorType[]) => void
 }
 
 export interface ControlProps {

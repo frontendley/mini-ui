@@ -1,10 +1,11 @@
-import { FormEvent, PropsWithChildren, useEffect } from "react"
+import { FormEvent, PropsWithChildren } from "react"
 import { FormProps } from "./interface"
 import { FromProvider } from "./context"
 import { useForm } from "./useForm"
 
 import "./styles/Form.less"
 import { classNames as cls, getPrefix } from "../../utils"
+import { useCreate } from "../../hooks/useCreate"
 
 const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) => {
 
@@ -25,9 +26,9 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
   const formInstance = useForm(form)  // form 实例
 
   // effect 初始化form的初始值
-  useEffect(() => {
-    formInstance.innerSetInitialValues(initialValue)
-  }, [])
+  useCreate(() => {
+    form?.innerSetInitialValues(initialValue)
+  })
 
   // 派生数据
   const formContext = { // form 组件的上下文
@@ -52,8 +53,18 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
   // 事件
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event?.preventDefault()
+    form?.submit()
+    // props.
   }
 
+
+  // 给 form store 注册事件
+  form?.innerRegisterEventCallbacks({
+    onChange: props.onChange,
+    onValuesChange: props.onValuesChange,
+    onSubmit: props.onSubmit,
+    onSubmitFaild: props.onSubmitFaild
+  })
 
   return (
     <FromProvider value={formContext}>

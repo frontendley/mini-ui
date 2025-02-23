@@ -12,7 +12,8 @@
     "dev:ui": "pnpm --filter=ui run dev",
     "dev:app": "pnpm --filter=no-code-base run dev",
     "docs": "pnpm --filter=website run dev",
-    "dev": "pnpm -r --parallel --filter=ui --filter=website run dev"
+    "dev": "pnpm -r --parallel --filter=ui --filter=website run dev",
+    "release:ui": "pnpm --filter=ui run release"
   },
   "config": {
     "commitizen": {

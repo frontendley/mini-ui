@@ -1,19 +1,16 @@
 {
   "name": "@mini-ui/ui",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Mini React UI Library",
   "main": "index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "private": "true",
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "release": "pnpm run build && np --no-tests && npm publish"
+    "release": "pnpm run build && np --no-tests --no-publish && npm publish"
   },
   "np": {
-    "tests": false,
-    "publish": false,
     "packageManager": "pnpm"
   },
   "keywords": [

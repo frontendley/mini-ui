@@ -8,15 +8,15 @@ type StoreCallbacks<FormData> = Pick<
 >
 
 export class Store<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    FormData = any,
-    FieldKey extends FieldKeyType = keyof FormData
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  FormData = any,
+  FieldKey extends FieldKeyType = keyof FormData
 > {
   store: Partial<FormData>; // 存放 form 数据
   initialValues: Partial<FormData>; // form 表单的初始值
 
   subscribers: StoreSubscriberProtocol<FormData> = {} // Control 组件中注册的 FormItem 相关操作
-  callbacks: StoreCallbacks<FormData> = {} 
+  callbacks: StoreCallbacks<FormData> = {} // 存放 form 组件通过 props 传入的回调函数
 
   constructor() {
     this.store = {}
@@ -26,25 +26,25 @@ export class Store<
 
   /**
    * @desc 任何变更引发 store 变更的事件， 都会通知 form 的 onValuesChange
-   * */ 
+   * */
   private triggerValueChange(changeValues: Partial<FormData>) {
-    if(changeValues && Object.keys(changeValues).length) {
+    if (changeValues && Object.keys(changeValues).length) {
       this.callbacks?.onValuesChange?.(changeValues, this.getFields())
     }
   }
 
   /**
    * @desc Control 触发内部 store 发生变更后通知 form 中的 onChange
-   * */ 
+   * */
   private triggerTouchChange(changeValues: Partial<FormData>) {
-    if(changeValues && Object.keys(changeValues).length) {
+    if (changeValues && Object.keys(changeValues).length) {
       this.callbacks?.onChange?.(changeValues, this.getFields())
     }
   }
 
   /**
    * @desc Control 中触发改变事件后， 同步 store 中的状态。
-   * */ 
+   * */
   innerSetFieldValue(field?: FieldKey, value?: string) {
     if (!field) return
     this.store = {
@@ -52,8 +52,8 @@ export class Store<
       [field]: value
     }
 
-    this.triggerTouchChange({[field]: value} as Partial<FormData>)
-    this.triggerValueChange({[field]: value} as Partial<FormData>)
+    this.triggerTouchChange({ [field]: value } as Partial<FormData>)
+    this.triggerValueChange({ [field]: value } as Partial<FormData>)
   }
 
   /**
@@ -99,14 +99,14 @@ export class Store<
 
   /**
    * @desc 注册 Form props 中的事件 onChange、onValuesChange、onSubmit、 onSubmitFailed
-   * */ 
+   * */
   innerRegisterEventCallbacks(callbacks: StoreCallbacks<FormData>) {
     this.callbacks = callbacks
   }
 
   /**
    * @desc store 发布订阅注册符合协议的订阅
-   * */ 
+   * */
   innerRegistFieldCallback(field: FieldKey, subscriber: StoreSubscriberProtocol<FormData>[FieldKey]) {
 
     this.subscribers = {
@@ -117,11 +117,11 @@ export class Store<
 
   /**
    * -------------------------------- 外界调用方法 --------------------------------
-   * */ 
+   * */
 
   /**
    * @desc 手动触发组件内部的校验规则
-   * */ 
+   * */
   async validate(fields?: string[], callback?: (errors: FieldErrorType[], values: Partial<FormData>) => void) {
     fields = isArray(fields) ? fields : Object.keys(this.store)
     const promises = fields.map(field => {
@@ -138,7 +138,7 @@ export class Store<
 
   /**
    * @desc 外部设置单个 field 的值。
-   * */ 
+   * */
   setFieldValue(field: FieldKeyType, value: FormData[keyof FormData]) {
 
     this.setFields({
@@ -146,19 +146,19 @@ export class Store<
         value
       }
     })
-  } 
+  }
 
   /**
    * @desc 外部设置 form 表单的值  
-   * */ 
+   * */
   setFields(obj: Record<FieldKeyType, Omit<StoreChangeInfo<FormData>, 'field'>>) {
-    const keys = Object.keys(obj) 
-    const changeValues: Partial<FormData> = {} 
+    const keys = Object.keys(obj)
+    const changeValues: Partial<FormData> = {}
 
     keys.forEach(field => {
-      const item = obj[field] 
+      const item = obj[field]
 
-      if('value' in item) {
+      if ('value' in item) {
         set(this.store, field, item.value)
         set(changeValues, field, item.value)
       }
@@ -174,8 +174,8 @@ export class Store<
 
   /**
    * @desc 外部设置多个表单控件的值
-   * */ 
- setFieldsValue(obj: Record<FieldKey, unknown>) {
+   * */
+  setFieldsValue(obj: Record<FieldKey, unknown>) {
     const changedValue = Object.keys(obj)
       .reduce((prev, cur) => {
 
@@ -187,15 +187,15 @@ export class Store<
         }
       }, {})
 
-      this.setFields(changedValue)
+    this.setFields(changedValue)
   }
 
   /**
    * @desc 重置表单控件的值为初始值
-   * */ 
+   * */
   resetFields(fields?: string[]) {
-    fields = isArray(fields) ? fields : Object.keys(this.store) 
-    
+    fields = isArray(fields) ? fields : Object.keys(this.store)
+
     const changeValue = {} as Record<FieldKey, unknown>
     fields?.forEach(field => {
       const value = this.initialValues?.[field as keyof FormData]
@@ -207,13 +207,13 @@ export class Store<
 
   /**
    * @desc 提交表单
-   * */ 
+   * */
   async submit() {
     const errors = await this.validate()
 
-    if(errors.length) {
-        this.callbacks?.onSubmitFaild?.(errors)
-        return
+    if (errors.length) {
+      this.callbacks?.onSubmitFaild?.(errors)
+      return
     }
 
     this.callbacks?.onSubmit?.(this.getFields() as FormData)

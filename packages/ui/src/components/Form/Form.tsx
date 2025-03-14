@@ -27,7 +27,7 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
 
   // effect 初始化form的初始值
   useCreate(() => {
-    form?.innerSetInitialValues(initialValue)
+    formInstance?.innerSetInitialValues(initialValue)
   })
 
   // 派生数据
@@ -53,13 +53,13 @@ const FormInner = <FormData, >(props: PropsWithChildren<FormProps<FormData>>) =>
   // 事件
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event?.preventDefault()
-    form?.submit()
+    formInstance?.submit()
     // props.
   }
 
 
   // 给 form store 注册事件
-  form?.innerRegisterEventCallbacks({
+  formInstance?.innerRegisterEventCallbacks({
     onChange: props.onChange,
     onValuesChange: props.onValuesChange,
     onSubmit: props.onSubmit,

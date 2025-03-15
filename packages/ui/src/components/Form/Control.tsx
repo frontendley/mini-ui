@@ -1,8 +1,9 @@
 import { cloneElement, PropsWithChildren, ReactElement, useEffect } from "react"
 import { useFormContext } from "./context"
-import { ControlProps, StoreChangeInfo } from "./interface"
+import { ControlProps, StoreChangeInfo, StoreChangeType } from "./interface"
 import { validate } from "./utils";
 import { isArray } from "lodash-es";
+import { useUpdate } from "../../hooks/useUpdate";
 
 export const Control = (props: PropsWithChildren<ControlProps>) => {
   // props
@@ -13,6 +14,9 @@ export const Control = (props: PropsWithChildren<ControlProps>) => {
     onError,
     children
   } = props
+
+  // force re-render
+  const forceUpdate = useUpdate()
 
   // context 
   const { form } = useFormContext()
@@ -25,7 +29,6 @@ export const Control = (props: PropsWithChildren<ControlProps>) => {
   }
 
   function onValueChange(value?: string) {
-    // setValue(value)
     form?.innerSetFieldValue(field, value)
   }
 
@@ -57,15 +60,27 @@ export const Control = (props: PropsWithChildren<ControlProps>) => {
     return errors
   }
 
-  function handleStoreChange(info: StoreChangeInfo<FormData>) {
-    onValueChange(info.value as unknown as string)
+  function handleStoreChange(type: StoreChangeType, info: StoreChangeInfo<FormData>) {
+    switch(type) {
+      case 'innerSetValue':
+        if(info.field === field) {
+          forceUpdate()
+        }
+        break
+      case 'setFieldValue':
+        if(info.errors)
+          onError?.(info.errors)
 
-    if(info.errors)
-      onError?.(info.errors)
+        if(info.field === field) {
+          forceUpdate()
+        }
+        break
+      default:
+        break
+    }
   }
 
   // 副作用
-
   useEffect(() => {
     if(!field)
       return

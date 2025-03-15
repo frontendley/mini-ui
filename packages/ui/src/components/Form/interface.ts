@@ -22,8 +22,13 @@ export type RuleProps = SchemaRuleType & {
 }
 
 /**
+ * @desc 当 Store 被触发需要直接修改 Control 内部值时的 type 种类。
+ * */
+export type StoreChangeType = 'innerSetValue' | 'setFieldValue'
+
+/**
  * @desc 当 Store 被触发需要直接修改 Control 内部值时的 info 类型。
- * */ 
+ * */
 export interface StoreChangeInfo<FormData> {
   field?: FieldKeyType;
   value?: FormData[keyof FormData];
@@ -32,22 +37,22 @@ export interface StoreChangeInfo<FormData> {
 
 /**
  * @desc 注册进入store的回调函数的协议
- * */ 
+ * */
 export type StoreSubscriberProtocol<FormData> = Record<
-  FieldKeyType, 
+  FieldKeyType,
   {
     validate: (value?: FormData[keyof FormData]) => Promise<FieldErrorType>;
-    onStoreChange: (info: StoreChangeInfo<FormData>) => void
+    onStoreChange: (type: StoreChangeType, info: StoreChangeInfo<FormData>) => void
   }
 >
 
 /**
  * @desc FormContext 和 FormItem 和 FormProps 共用的 API
- * */ 
+ * */
 export interface CommonProps {
   /**
    * @zh 标签的文本对齐方式
-   * */ 
+   * */
   labelAlign?: 'left' | 'right'
 
   /**
@@ -67,12 +72,12 @@ export interface CommonProps {
 
   /**
    * @zh 是否在 required 的时候显示加重的红色星号， 可通过设置 position 设定展示在 label 的位置（'start' | 'end'）
-   * */ 
+   * */
   requiredSymbol?: boolean | { position: "start" | "end" }
 
   /**
    * @zh 是否显示标签后的一个冒号
-   * */ 
+   * */
   colon?: boolean | ReactNode
 }
 
@@ -98,7 +103,7 @@ export interface FormItemProps extends CommonProps {
   rules?: RuleProps[]
   /**
    * @zh 校验状态
-   * */ 
+   * */
   validateStatus?: 'success' | 'warning' | 'error' | 'validating';
 }
 
@@ -113,19 +118,19 @@ export interface FormProps<FormData> extends CommonProps {
   initialValue?: Partial<FormData>
   /**
    * @zh 表单项值改变时触发， 和 onValuesChange 不同的是只会在用户操作表单项时触发。 
-   * */ 
+   * */
   onChange?: (value: Partial<FormData>, values: Partial<FormData>) => void;
   /**
    * @zh 任意表单项值改变时候触发。第一个参数是被改变表单项的值，第二个参数是所有的表单项值
-   * */ 
+   * */
   onValuesChange?: (value: Partial<FormData>, values: Partial<FormData>) => void;
   /**
    * @zh 数据验证成功后的回调事件
-   * */ 
+   * */
   onSubmit?: (values: FormData) => void;
   /**
    * @zh 数据验证失败后回调事件
-   * */ 
+   * */
   onSubmitFaild?: (errors: FieldErrorType[]) => void
 }
 
@@ -140,7 +145,7 @@ export interface ControlProps {
   rules?: RuleProps[]
   /**
    * @zh 校验状态
-   * */ 
+   * */
   validateStatus?: 'success' | 'warning' | 'error' | 'validating';
   /**
    * @zh 发生错误时的调用函数
@@ -156,10 +161,10 @@ export interface FormItemTipProps {
 
   /**
    * @zh form tip 的 className 前缀
-   * */ 
+   * */
   prefixCls: string;
   /**
    * @zh 传递信息的类型
-   * */ 
+   * */
   type?: "error" | "warning";
 }

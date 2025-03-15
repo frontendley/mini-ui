@@ -1,5 +1,5 @@
 import { isArray } from "../../utils";
-import { FieldErrorType, FieldKeyType, FormProps, StoreSubscriberProtocol, StoreChangeInfo } from "./interface"
+import { FieldErrorType, FieldKeyType, FormProps, StoreSubscriberProtocol, StoreChangeInfo, StoreChangeType } from "./interface"
 import { cloneDeep, get, set } from "lodash-es"
 
 type StoreCallbacks<FormData> = Pick<
@@ -54,6 +54,14 @@ export class Store<
 
     this.triggerTouchChange({ [field]: value } as Partial<FormData>)
     this.triggerValueChange({ [field]: value } as Partial<FormData>)
+
+    this.notifyStoreChange(
+      'innerSetValue',
+      {
+        field,
+        value: value as FormData[keyof FormData]
+      }
+    )
   }
 
   /**
@@ -163,10 +171,13 @@ export class Store<
         set(changeValues, field, item.value)
       }
 
-      this.notifyStoreChange({
-        ...item,
-        field
-      })
+      this.notifyStoreChange(
+        'setFieldValue',
+        {
+          ...item,
+          field
+        }
+      )
     })
 
     this.triggerValueChange(changeValues)
@@ -222,7 +233,7 @@ export class Store<
   /**
    * @desc 发布Store内部的状态变更
    * */
-  private notifyStoreChange(info: StoreChangeInfo<FormData>) {
-    this.subscribers?.[info?.field as keyof StoreSubscriberProtocol<FormData>]?.onStoreChange?.(info)
+  private notifyStoreChange(type: StoreChangeType, info: StoreChangeInfo<FormData>) {
+    this.subscribers?.[info?.field as keyof StoreSubscriberProtocol<FormData>]?.onStoreChange?.(type, info)
   }
 }
